@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
 
-    
+    comments = db.relationship('Comment', back_populates='user')
     glucose_trackers = db.relationship('GlucoseTracker', back_populates='user')
     questions = db.relationship('Question', back_populates='user')
     bookmarked_questions = db.relationship('Bookmark', back_populates='user')

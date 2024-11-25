@@ -1,6 +1,9 @@
 from flask.cli import AppGroup
 from .users import seed_users, undo_users
-
+from .bookmarks import seed_bookmarks, undo_bookmarks
+from .comments import seed_comments, undo_comments
+from .questions import seed_questions, undo_questions
+from .glucosetracker import seed_glucose_trackers, undo_glucose_trackers
 from app.models.db import db, environment, SCHEMA
 
 # Creates a seed group to hold our commands
@@ -17,7 +20,15 @@ def seed():
         # the schema name (see comment in users.py undo_users function).
         # Make sure to add all your other model's undo functions below
         undo_users()
+        undo_comments()
+        undo_questions()
+        undo_bookmarks()
+        undo_glucose_trackers()
     seed_users()
+    seed_comments()
+    seed_questions()
+    seed_bookmarks()
+    seed_glucose_trackers()
     # Add other seed functions here
 
 
@@ -25,4 +36,8 @@ def seed():
 @seed_commands.command('undo')
 def undo():
     undo_users()
+    undo_comments()
+    undo_questions()
+    undo_bookmarks()
+    undo_glucose_trackers()
     # Add other undo functions here

@@ -1,0 +1,28 @@
+from app.models import db, User, environment, SCHEMA, GlucoseTracker
+from sqlalchemy.sql import text
+from datetime import datetime
+
+
+
+# Add demo glucose tracker entries
+def seed_glucose_trackers():
+    demo_user = User.query.filter_by(username='Demo').first()
+    marnie_user = User.query.filter_by(username='marnie').first()
+    
+    glucose1 = GlucoseTracker(
+        date=datetime(2024, 11, 1), before_breakfast=120, before_lunch=130, before_dinner=110, hbA1c=6.5, user=demo_user)
+    glucose2 = GlucoseTracker(
+        date=datetime(2024, 11, 2), before_breakfast=140, before_lunch=145, before_dinner=120, hbA1c=6.8, user=marnie_user)
+
+    db.session.add(glucose1)
+    db.session.add(glucose2)
+    db.session.commit()
+
+
+# Delete all glucose trackers from the database
+def undo_glucose_trackers():
+    if environment == "production":
+        db.session.execute(f"TRUNCATE table {SCHEMA}.glucose_tracker RESTART IDENTITY CASCADE;")
+    else:
+        db.session.execute(text("DELETE FROM glucose_tracker"))
+    db.session.commit()

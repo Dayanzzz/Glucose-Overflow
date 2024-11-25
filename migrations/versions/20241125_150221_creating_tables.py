@@ -42,8 +42,10 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('comment_text', sa.String(length=500), nullable=False),
     sa.Column('date_posted', sa.DateTime(), nullable=True),
-    sa.Column('question_id', sa.Integer(), nullable=False),
+    sa.Column('question_id', sa.Integer(), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['question_id'], ['questions.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

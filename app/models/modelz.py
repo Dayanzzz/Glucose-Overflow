@@ -20,7 +20,7 @@ class GlucoseTracker(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     
     # Defining the relationship with User
-    user = db.relationship('User', backref=db.backref('glucose_trackers', lazy=True))
+    user = db.relationship('User', back_populates='glucose_trackers')
 
 
     def __repr__(self):
@@ -51,6 +51,9 @@ class Question(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     user = db.relationship('User', back_populates='questions')
+    users_bookmarked = db.relationship('Bookmark', back_populates='question')
+    comments = db.relationship('Comment', back_populates='question', lazy=True)
+
 
     # favorited_by = db.relationship('User', secondary='favorites', back_populates='favorites')
 
@@ -77,9 +80,9 @@ class Bookmark(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     question_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('questions.id')), nullable=False)
 
-    # Relationships
-    user = db.relationship('User', backref=db.backref('bookmarked_questions', lazy=True))
-    question = db.relationship('Question', backref=db.backref('users_bookmarked', lazy=True))
+    # Relationships (using back_populates instead of backref)
+    user = db.relationship('User', back_populates='bookmarked_questions')
+    question = db.relationship('Question', back_populates='users_bookmarked')
 
     def __repr__(self):
         return f"<Bookmark {self.user_id} -> {self.question_id}>"
@@ -93,6 +96,7 @@ class Bookmark(db.Model):
 
 
 
+
 class Comment(db.Model):
     __tablename__ = 'comments'
 
@@ -103,9 +107,12 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     comment_text = db.Column(db.String(500), nullable=False)
     date_posted = db.Column(db.DateTime, default=datetime.utcnow)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user = db.relationship('User', back_populates='comments')
     
     
-    question_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('questions.id')), nullable=False)
+    question_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('questions.id')), nullable=True)
+    question = db.relationship('Question', back_populates='comments')
 
     def __repr__(self):
         return f"<Comment {self.comment_text[:20]}>"
