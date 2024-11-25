@@ -14,6 +14,12 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
+
+    
+    glucose_trackers = db.relationship('GlucoseTracker', back_populates='user')
+    questions = db.relationship('Question', back_populates='user')
+    bookmarked_questions = db.relationship('Bookmark', back_populates='user')
+
     @property
     def password(self):
         return self.hashed_password
@@ -29,5 +35,8 @@ class User(db.Model, UserMixin):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+             'glucose_trackers': [tracker.to_dict() for tracker in self.glucose_trackers],
+            'questions': [question.to_dict() for question in self.questions],
+            'bookmarked_questions': [bookmark.to_dict() for bookmark in self.bookmarked_questions]
         }

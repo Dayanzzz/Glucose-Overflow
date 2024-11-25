@@ -1,0 +1,23 @@
+.right-page-head {
+    display: flex; /* Use flexbox to place elements on the same line */
+    justify-content: space-around; /* Center the items horizontally */
+    align-items: center; /* Vertically center the items */
+    width: 100%; /* Ensure this container takes up full width */
+    padding: 0 20px; /* Optional: add padding to prevent items from touching the edges */
+    margin-top: 20px; /* Optional: add top margin */
+}
+
+.right-title {
+    margin: 0; /* Remove any default margin */
+    text-align: center; /* Center the title within its space */
+    margin-right: 20px; /* Add space between the title and the button */
+}
+
+.new-entry {
+    padding: 10px 20px; /* Style the button */
+    font-size: 16px; /* Optional: increase button text size */
+}
+
+.right-page{
+    width:100%
+}

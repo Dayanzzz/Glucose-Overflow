@@ -21,6 +21,11 @@ function Sidebar(){
                 <NavLink to="/" title="Go to Homepage Dashboard">Homepage</NavLink>
             </div>
             <div className="sidebar-btn-area">
+            <NavLink to="/glucose" title="See Your Glucose-overflow">Blood Sugar Tracker</NavLink>
+           
+            
+            </div>
+            <div className="sidebar-btn-area">
             <NavLink to="/questions" title="Click here to view Questions">Questions</NavLink>
            
             
@@ -29,11 +34,7 @@ function Sidebar(){
             <NavLink to="/recipes" title="Click here to view Recipes">Recipes</NavLink>
         
             </div>
-            <div className="sidebar-btn-area">
-            <NavLink to="/glucose" title="See Your Glucose-overflow">Glucose Journal</NavLink>
-           
             
-            </div>
             <div className="sidebar-btn-area">
             <NavLink to="/favorites" title="See Your Favorites">Favorites</NavLink>
           
