@@ -22,7 +22,7 @@ def seed_bookmarks():
     db.session.commit()
 
 
-# Delete all bookmarks from the database
+
 def undo_bookmarks():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.bookmarks RESTART IDENTITY CASCADE;")

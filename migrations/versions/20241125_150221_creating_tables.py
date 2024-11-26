@@ -21,11 +21,13 @@ def upgrade():
     op.create_table('glucose_tracker',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('date', sa.Date(), nullable=False),
-    sa.Column('before_breakfast', sa.Float(), nullable=False),
-    sa.Column('before_lunch', sa.Float(), nullable=False),
-    sa.Column('before_dinner', sa.Float(), nullable=False),
+    sa.Column('before_breakfast', sa.Float(), nullable=True),
+    sa.Column('before_lunch', sa.Float(), nullable=True),
+    sa.Column('before_dinner', sa.Float(), nullable=True),
     sa.Column('hbA1c', sa.Float(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False, ),  # Track creation time
+    sa.Column('updated_at', sa.DateTime(), nullable=False, ),  # Track last update time
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

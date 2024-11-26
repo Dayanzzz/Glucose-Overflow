@@ -1,0 +1,153 @@
+// Selectors
+export const selectGlucose = (state) => state.glucose.glucoseEntries;
+
+// Initial state
+const initialState = {
+  glucoseEntries: [],
+};
+
+// Action Types
+const GET_GLUCOSE = "glucose/getGlucose";
+const ADD_GLUCOSE = "glucose/addGlucose";
+const DELETE_GLUCOSE = "glucose/deleteGlucose";
+const UPDATE_GLUCOSE = "glucose/updateGlucose";
+
+// Action Creators
+const getGlucose = (glucoseEntries) => ({
+  type: GET_GLUCOSE,
+  payload: glucoseEntries,
+});
+
+const addGlucose = (addedGlucose) => ({
+  type: ADD_GLUCOSE,
+  payload: addedGlucose,
+});
+
+const deleteGlucose = (glucoseToDelete) => ({
+  type: DELETE_GLUCOSE,
+  payload: glucoseToDelete,
+});
+
+const updateGlucoseAction = (updatedGlucose) => ({
+  type: UPDATE_GLUCOSE,
+  payload: updatedGlucose,
+});
+
+// Thunks (Async Actions)
+
+// Add a Glucose Entry
+export const createGlucoseEntry = (addedGlucose) => async (dispatch) => {
+  const { date, before_breakfast, before_lunch, before_dinner, hbA1c } = addedGlucose;
+
+  try {
+    const response = await fetch("/api/glucose", {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ date, before_breakfast, before_lunch, before_dinner, hbA1c }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      if (response.status === 400) {
+        console.error('Validation Errors:', data.errors);
+        throw data.errors;
+      }
+      throw new Error(data.message || 'Failed to create glucose entry');
+    }
+
+    dispatch(addGlucose(data));
+    return data;
+
+  } catch (error) {
+    console.error('Error creating glucose entry:', error);
+    throw error;
+  }
+};
+
+// Get All Glucose Entries
+export const getAllGlucoseEntries = () => async (dispatch) => {
+  const response = await fetch("/api/glucose");
+
+  if (response.ok) {
+    const data = await response.json();
+    dispatch(getGlucose(data));
+  } else if (response.status < 500) {
+    const errorMessages = await response.json();
+    return errorMessages;
+  } else {
+    return { server: "Something went wrong. Please try again" };
+  }
+};
+
+// Update a Glucose Entry
+export const updateGlucoseEntry = (glucoseId, glucose) => async (dispatch) => {
+  try {
+    const response = await fetch(`/api/glucose/${glucoseId}`, {
+      method: "PUT",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(glucose),
+    });
+
+    if (response.ok) {
+      const updatedGlucose = await response.json();
+      dispatch(updateGlucoseAction(updatedGlucose));
+      return updatedGlucose;
+    }
+  } catch (err) {
+    console.error(`Error updating glucose entry: ${err}`);
+  }
+};
+
+// Delete a Glucose Entry
+export const deleteGlucoseEntry = (glucoseId) => async (dispatch) => {
+  try {
+    const response = await fetch(`/api/glucose/${glucoseId}`, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      dispatch(deleteGlucose(glucoseId));
+    } else {
+      throw new Error('Failed to delete glucose entry');
+    }
+  } catch (error) {
+    console.error('Error deleting glucose entry', error);
+  }
+};
+
+// Reducer
+const glucoseReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case GET_GLUCOSE:
+      return {
+        ...state,
+        glucoseEntries: action.payload,
+      };
+
+    case ADD_GLUCOSE:
+      return {
+        ...state,
+        glucoseEntries: [...state.glucoseEntries, action.payload],
+      };
+
+    case DELETE_GLUCOSE:
+      return {
+        ...state,
+        glucoseEntries: state.glucoseEntries.filter((entry) => entry.id !== action.payload),
+      };
+
+    case UPDATE_GLUCOSE:
+      return {
+        ...state,
+        glucoseEntries: state.glucoseEntries.map((entry) =>
+          entry.id === action.payload.id ? action.payload : entry
+        ),
+      };
+
+    default:
+      return state;
+  }
+};
+
+export default glucoseReducer;

@@ -19,7 +19,7 @@ class GlucoseTracker(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     
-    # Defining the relationship with User
+    
     user = db.relationship('User', back_populates='glucose_trackers')
 
 
@@ -55,7 +55,7 @@ class Question(db.Model):
     comments = db.relationship('Comment', back_populates='question', lazy=True)
 
 
-    # favorited_by = db.relationship('User', secondary='favorites', back_populates='favorites')
+    
 
     def __repr__(self):
         return f"<Question {self.question_text}>"
@@ -66,7 +66,7 @@ class Question(db.Model):
             'question_text': self.question_text,
             'answered': self.answered,
             'date_asked': self.date_asked,
-            # 'favorited_by': [user.to_dict() for user in self.favorited_by],
+            
             'user_id': self.user_id
         }
 
@@ -80,7 +80,7 @@ class Bookmark(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     question_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('questions.id')), nullable=False)
 
-    # Relationships (using back_populates instead of backref)
+    
     user = db.relationship('User', back_populates='bookmarked_questions')
     question = db.relationship('Question', back_populates='users_bookmarked')
 

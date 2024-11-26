@@ -5,6 +5,8 @@ import Layout from './Layout';
 import HomePage from '../components/HomePage/HomePage';
 import GlucoseTracker from '../components/GlucoseTracker/GlucoseTracker';
 import NewGlucose from '../components/GlucoseTracker/NewGlucose';
+import CreateQuestion from '../components/Question/CreateQuestion';
+import UpdateGlucose from '../components/GlucoseTracker/UpdateGlucose';
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +44,10 @@ export const router = createBrowserRouter([
         path: "glucose/new",
         element: <NewGlucose />,
       },
+      {
+        path: "glucose/:entryId",
+        element: <UpdateGlucose />,
+      },
       // {
       //   path: "favorites",
       //   element: <Favorites />,
@@ -58,10 +64,10 @@ export const router = createBrowserRouter([
       //   path: "questions/manage",
       //   element: <QuestionManage />,
       // },
-      // {
-      //   path: "questions/new",
-      //   element: <CreateQuestion />,
-      // },
+      {
+        path: "questions/ask",
+        element: <CreateQuestion />,
+      },
     ],
   },
 ]);

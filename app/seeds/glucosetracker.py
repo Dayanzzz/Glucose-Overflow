@@ -4,7 +4,7 @@ from datetime import datetime
 
 
 
-# Add demo glucose tracker entries
+
 def seed_glucose_trackers():
     demo_user = User.query.filter_by(username='Demo').first()
     marnie_user = User.query.filter_by(username='marnie').first()
@@ -19,7 +19,7 @@ def seed_glucose_trackers():
     db.session.commit()
 
 
-# Delete all glucose trackers from the database
+
 def undo_glucose_trackers():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.glucose_tracker RESTART IDENTITY CASCADE;")
