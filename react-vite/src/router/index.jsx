@@ -72,7 +72,7 @@ export const router = createBrowserRouter([
         element: <CreateQuestion />,
       },
       {
-        path: "questions/:questionId",
+        path: "questions/manage/:questionId",
         element: <UpdateQuestion />,
       },
     ],

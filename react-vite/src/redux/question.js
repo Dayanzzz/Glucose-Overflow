@@ -6,6 +6,7 @@ const initialState = {
     questions: [],
     myQuestions: [],
     currentQuestion: null,
+    comments:[],
     loading: false,
     error: null,
   };
@@ -18,6 +19,20 @@ export const CREATE_QUESTION = 'CREATE_QUESTION';
 export const UPDATE_QUESTION = 'UPDATE_QUESTION';
 export const DELETE_QUESTION = 'DELETE_QUESTION';
 export const GET_QUESTION_BY_ID = 'GET_QUESTION_BY_ID';
+
+export const GET_COMMENTS = 'GET_COMMENTS';
+export const POST_COMMENT = 'POST_COMMENT';
+
+const getComments = (comments) => ({
+  type: GET_COMMENTS,
+  payload: comments,
+});
+
+const postComment = (comment) => ({
+  type: POST_COMMENT,
+  payload: comment,
+});
+
 
 
 const getQuestions = (questions) => ({
@@ -53,6 +68,41 @@ const getQuestions = (questions) => ({
 
 
 // Action Creators
+
+export const fetchComments = (questionId) => async (dispatch) => {
+    try {
+      const response = await fetch(`/api/questions/${questionId}/comments`);
+      const data = await response.json();
+      if (response.ok) {
+        dispatch(getComments(data));
+      } else {
+        console.error("Error fetching comments:", data);
+      }
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    }
+  };
+  
+  export const createComment = (questionId, commentData) => async (dispatch) => {
+    try {
+      const response = await fetch(`/api/questions/${questionId}/comments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(commentData),
+      });
+  
+      const data = await response.json();
+      if (response.ok) {
+        dispatch(postComment(data));  // Dispatch the new comment to Redux
+      } else {
+        console.error("Error posting comment:", data);
+      }
+    } catch (error) {
+      console.error("Error posting comment:", error);
+    }
+  };
 
 export const fetchQuestionById = (questionId) => async (dispatch) => {
     try {
@@ -127,7 +177,7 @@ export const fetchQuestions = () => async (dispatch) => {
   // Thunk Action: Update an existing question
   export const updateQuestion = (questionId, updatedData) => async (dispatch) => {
     try {
-      const response = await fetch(`/api/questions/${questionId}`, {
+      const response = await fetch(`/api/questions/manage/${questionId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -150,7 +200,7 @@ export const fetchQuestions = () => async (dispatch) => {
   // Thunk Action: Delete a question
   export const deleteQuestionById = (questionId) => async (dispatch) => {
     try {
-      const response = await fetch(`/api/questions/${questionId}`, {
+      const response = await fetch(`/api/questions/manage/${questionId}`, {
         method: 'DELETE',
       });
   

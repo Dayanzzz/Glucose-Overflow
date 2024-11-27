@@ -32,6 +32,7 @@ def upgrade():
     )
     op.create_table('questions',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('title', sa.String(length=255), nullable=False),
     sa.Column('question_text', sa.String(length=255), nullable=False),
     sa.Column('answered', sa.Boolean(), nullable=True),
     sa.Column('date_asked', sa.DateTime(), nullable=True),

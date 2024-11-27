@@ -5,6 +5,7 @@ import Sidebar from '../SideBar/SideBar'
 
 const CreateQuestion = () => {
   const [questionText, setQuestionText] = useState(''); 
+  const [title, setTitle] = useState(''); 
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ const CreateQuestion = () => {
     e.preventDefault();
 
     const data = {
+      title,
       question_text: questionText,
     };
 
@@ -47,10 +49,21 @@ const CreateQuestion = () => {
         
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="questionText">Your Question:</label> 
+            <label htmlFor="title">Title:</label>  {/* Title label */}
+            <input
+              type="text"
+              id="title"
+              value={title}  // Bind title to the input
+              onChange={(e) => setTitle(e.target.value)}  // Update title state
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="questionText">Your Question:</label>
             <textarea
               id="questionText"
-              value={questionText} 
+              value={questionText}
               onChange={(e) => setQuestionText(e.target.value)}
               required
             />

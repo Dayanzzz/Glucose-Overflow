@@ -45,6 +45,7 @@ class Question(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255), nullable=False)
     question_text = db.Column(db.String(255), nullable=False)
     answered = db.Column(db.Boolean, default=False)
     date_asked = db.Column(db.DateTime, default=datetime.utcnow)
@@ -67,6 +68,7 @@ class Question(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
+            'title': self.title,
             'question_text': self.question_text,
             'answered': self.answered,
             'date_asked': self.date_asked,

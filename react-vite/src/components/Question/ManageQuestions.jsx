@@ -32,7 +32,7 @@ function QuestionManage() {
     if (questionToDelete) {
       try {
         
-        const response = await fetch(`/api/questions/${questionToDelete}`, {
+        const response = await fetch(`/api/questions/manage/${questionToDelete}`, {
           method: 'DELETE',
         });
 
@@ -57,7 +57,7 @@ function QuestionManage() {
   };
 
   const handleEdit = (questionId) => {
-    navigate(`/questions/${questionId}`);
+    navigate(`/questions/manage/${questionId}`);
   };
 
   if (loading) return <div>Loading...</div>;
@@ -73,6 +73,7 @@ function QuestionManage() {
         ) : (
           myQuestions.map((question) => (
             <div key={question.id} className="question-item">
+              <p>{question.title}</p>
               <p>{question.question_text}</p>
               <p>{question.date_asked}</p>
 

@@ -12,6 +12,7 @@ def get_my_questions():
     return jsonify([
         {
             'id': question.id,
+            'title': question.title,
             'question_text': question.question_text,
             'answered': question.answered,
             'date_asked': question.date_asked,
@@ -53,9 +54,11 @@ def create_question():
         return jsonify({'error': 'Question text is required'}), 400
 
     question_text = data['question_text']
+    title = data['title']
     
     # Create a new Question instance
     new_question = Question(
+        title=title,
         question_text=question_text,
         user_id=current_user.id,
         date_asked=datetime.utcnow()
@@ -68,7 +71,7 @@ def create_question():
 
 
 # PUT: Update an existing question by ID
-@question_routes.route('/<int:question_id>', methods=['PUT'])
+@question_routes.route('/manage/<int:question_id>', methods=['PUT'])
 @login_required
 def update_question(question_id):
     question = Question.query.get(question_id)
@@ -85,6 +88,9 @@ def update_question(question_id):
     # Update the fields as needed
     if 'question_text' in data:
         question.question_text = data['question_text']
+
+    if 'title' in data:
+        question.title = data['title']
     
     if 'answered' in data:
         question.answered = data['answered']
@@ -95,7 +101,7 @@ def update_question(question_id):
 
 
 # DELETE: Delete a question by ID
-@question_routes.route('/<int:question_id>', methods=['DELETE'])
+@question_routes.route('/manage/<int:question_id>', methods=['DELETE'])
 @login_required
 def delete_question(question_id):
     question = Question.query.get(question_id)

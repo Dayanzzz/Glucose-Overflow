@@ -6,11 +6,11 @@ def seed_questions():
     marnie_user = User.query.filter_by(username='marnie').first()
     
     question1 = Question(
-        question_text='What is the best way to manage diabetes?', answered=False, user=demo_user)
+        title='Manage', question_text='What is the best way to manage diabetes?', answered=False, user=demo_user)
     question2 = Question(
-        question_text='How can I control my blood sugar levels?', answered=True, user=marnie_user)
+        title='Levles', question_text='How can I control my blood sugar levels?', answered=True, user=marnie_user)
     question3 = Question(
-        question_text='What are some good glucose control foods?', answered=False, user=demo_user)
+        title='Foods', question_text='What are some good glucose control foods?', answered=False, user=demo_user)
 
 
     db.session.add(question1)
