@@ -7,6 +7,9 @@ import GlucoseTracker from '../components/GlucoseTracker/GlucoseTracker';
 import NewGlucose from '../components/GlucoseTracker/NewGlucose';
 import CreateQuestion from '../components/Question/CreateQuestion';
 import UpdateGlucose from '../components/GlucoseTracker/UpdateGlucose';
+import Questions from '../components/Question/Questions';
+import QuestionManage from '../components/Question/ManageQuestions';
+import UpdateQuestion from '../components/Question/UpdateQuestion';
 
 export const router = createBrowserRouter([
   {
@@ -56,17 +59,21 @@ export const router = createBrowserRouter([
       //   path: "stars",
       //   element: <StarQuestions />,
       // },
-      // {
-      //   path: "questions",
-      //   element: <Questions />,
-      // },
-      // {
-      //   path: "questions/manage",
-      //   element: <QuestionManage />,
-      // },
+      {
+        path: "questions",
+        element: <Questions />,
+      },
+      {
+        path: "questions/manage",
+        element: <QuestionManage />,
+      },
       {
         path: "questions/ask",
         element: <CreateQuestion />,
+      },
+      {
+        path: "questions/:questionId",
+        element: <UpdateQuestion />,
       },
     ],
   },

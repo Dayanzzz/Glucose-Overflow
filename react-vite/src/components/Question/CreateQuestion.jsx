@@ -4,8 +4,7 @@ import './AskQuestion.css';
 import Sidebar from '../SideBar/SideBar'
 
 const CreateQuestion = () => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [questionText, setQuestionText] = useState(''); // Renamed to reflect question_text
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
@@ -15,8 +14,7 @@ const CreateQuestion = () => {
     e.preventDefault();
 
     const data = {
-      title,
-      content,
+      question_text: questionText, // Send only question_text
     };
 
     try {
@@ -49,22 +47,11 @@ const CreateQuestion = () => {
         
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="title">Question Title:</label>
-            <input
-              type="text"
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="content">Your Question:</label>
+            <label htmlFor="questionText">Your Question:</label> {/* Changed label for clarity */}
             <textarea
-              id="content"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
+              id="questionText"
+              value={questionText} // Updated to questionText state
+              onChange={(e) => setQuestionText(e.target.value)}
               required
             />
           </div>
@@ -72,7 +59,7 @@ const CreateQuestion = () => {
           <button type="submit">Submit Question</button>
         </form>
 
-        {error && <p className="error">{error}</p>}
+        {error && <p className="error">{error}</p>} {/* Display error message if exists */}
       </div>
     </div>
   );

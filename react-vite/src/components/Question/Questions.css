@@ -1,0 +1,8 @@
+.question-page-wrapper{
+    display:flex
+}
+
+.quesitons-list-container{
+    width:100%;
+    display:grid
+}

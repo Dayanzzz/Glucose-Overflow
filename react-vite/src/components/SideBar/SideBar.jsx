@@ -31,6 +31,11 @@ function Sidebar(){
             
             </div>
             <div className="sidebar-btn-area">
+            <NavLink to="/questions/manage" title="Click here to view Questions">My Questions</NavLink>
+           
+            
+            </div>
+            <div className="sidebar-btn-area">
             <NavLink to="/recipes" title="Click here to view Recipes">Recipes</NavLink>
         
             </div>

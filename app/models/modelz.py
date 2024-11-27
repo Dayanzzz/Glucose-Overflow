@@ -51,6 +51,10 @@ class Question(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     user = db.relationship('User', back_populates='questions')
+
+   
+
+
     users_bookmarked = db.relationship('Bookmark', back_populates='question')
     comments = db.relationship('Comment', back_populates='question', lazy=True)
 
