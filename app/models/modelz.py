@@ -12,9 +12,9 @@ class GlucoseTracker(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, nullable=False)
-    before_breakfast = db.Column(db.Float, nullable=False)
-    before_lunch = db.Column(db.Float, nullable=False)
-    before_dinner = db.Column(db.Float, nullable=False)
+    before_breakfast = db.Column(db.Float, nullable=True)
+    before_lunch = db.Column(db.Float, nullable=True)
+    before_dinner = db.Column(db.Float, nullable=True)
     hbA1c = db.Column(db.Float, nullable=True)  
 
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
@@ -29,7 +29,7 @@ class GlucoseTracker(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'date': self.date,
+            'date': self.date.strftime('%Y-%m-%d'), 
             'before_breakfast': self.before_breakfast,
             'before_lunch': self.before_lunch,
             'before_dinner': self.before_dinner,

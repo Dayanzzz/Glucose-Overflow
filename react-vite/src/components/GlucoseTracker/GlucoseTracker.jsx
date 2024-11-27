@@ -24,18 +24,22 @@ function GlucoseTracker() {
 
   const handleDelete = (entryId) => {
     setEntryToDelete(entryId);
-    setShowModal(true); // Show the delete confirmation modal
+    setShowModal(true); 
   };
 
   const handleConfirmDelete = () => {
     if (entryToDelete) {
-      dispatch(deleteGlucoseEntry(entryToDelete)); // Dispatch delete action to remove glucose entry from the backend
-      setShowModal(false);  // Close the modal
+      dispatch(deleteGlucoseEntry(entryToDelete)); 
+      setShowModal(false);  
     }
   };
 
   const handleCancelDelete = () => {
-    setShowModal(false);  // Close the modal without deleting
+    setShowModal(false);  
+  };
+
+  const handleCreateNewEntry = () => {
+    navigate('/glucose/new'); 
   };
 
   return (
@@ -44,15 +48,25 @@ function GlucoseTracker() {
 
       <div className="right">
         <div><h1>Blood Sugar Entries</h1></div>
+
+        
+        <div className="create-entry-btn">
+          <button onClick={handleCreateNewEntry} className="create-entry-btn">
+            Create Your Daily Journal Today
+          </button>
+        </div>
+
         <div className="entries-grid">
           {glucoseEntries.slice(0, 6).map((entry, index) => (
             <div className="entry-card" key={index}>
+              <div className="data">
               <h2>HbA1c: {entry.hbA1c}</h2>
-              <p>Date: {new Date(entry.date).toLocaleDateString()}</p>
+              <p>Date: {new Date(entry.date).toISOString().split('T')[0]}</p>
               <div className="glucose-levels">
                 <p>Before Breakfast: {entry.before_breakfast} mg/dL</p>
                 <p>Before Lunch: {entry.before_lunch} mg/dL</p>
                 <p>Before Dinner: {entry.before_dinner} mg/dL</p>
+              </div>
               </div>
               <div className="entry-buttons">
                 <button onClick={() => handleEdit(entry.id)} className="edit-btn">
@@ -67,7 +81,7 @@ function GlucoseTracker() {
         </div>
       </div>
 
-      {/* Delete Confirmation Modal */}
+      
       <DeleteConfirmationModal 
         show={showModal} 
         onConfirm={handleConfirmDelete} 

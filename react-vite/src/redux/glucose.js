@@ -1,18 +1,18 @@
-// Selectors
+
 export const selectGlucose = (state) => state.glucose.glucoseEntries;
 
-// Initial state
+
 const initialState = {
   glucoseEntries: [],
 };
 
-// Action Types
+
 const GET_GLUCOSE = "glucose/getGlucose";
 const ADD_GLUCOSE = "glucose/addGlucose";
 const DELETE_GLUCOSE = "glucose/deleteGlucose";
 const UPDATE_GLUCOSE = "glucose/updateGlucose";
 
-// Action Creators
+
 const getGlucose = (glucoseEntries) => ({
   type: GET_GLUCOSE,
   payload: glucoseEntries,
@@ -33,24 +33,26 @@ const updateGlucoseAction = (updatedGlucose) => ({
   payload: updatedGlucose,
 });
 
-// Thunks (Async Actions)
+
 
 // Add a Glucose Entry
 export const createGlucoseEntry = (addedGlucose) => async (dispatch) => {
-  const { date, before_breakfast, before_lunch, before_dinner, hbA1c } = addedGlucose;
+ 
 
   try {
     const response = await fetch("/api/glucose", {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ date, before_breakfast, before_lunch, before_dinner, hbA1c }),
+      body: JSON.stringify(addedGlucose),
     });
 
     const data = await response.json();
+    console.error('error details', data)
 
     if (!response.ok) {
       if (response.status === 400) {
         console.error('Validation Errors:', data.errors);
+        console.log('Error response data:', data);
         throw data.errors;
       }
       throw new Error(data.message || 'Failed to create glucose entry');
@@ -81,18 +83,19 @@ export const getAllGlucoseEntries = () => async (dispatch) => {
 };
 
 // Update a Glucose Entry
-export const updateGlucoseEntry = (glucoseId, glucose) => async (dispatch) => {
+export const updateGlucoseEntry = (glucoseId, updatedGlucose) => async (dispatch) => {
   try {
     const response = await fetch(`/api/glucose/${glucoseId}`, {
       method: "PUT",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(glucose),
+      body: JSON.stringify(updatedGlucose),
     });
 
     if (response.ok) {
-      const updatedGlucose = await response.json();
-      dispatch(updateGlucoseAction(updatedGlucose));
-      return updatedGlucose;
+      const updatedData = await response.json();
+      console.log("updated data=============", updatedData)
+      dispatch(updateGlucoseAction(updatedData));
+      dispatch(getAllGlucoseEntries());
     }
   } catch (err) {
     console.error(`Error updating glucose entry: ${err}`);
@@ -138,6 +141,8 @@ const glucoseReducer = (state = initialState, action) => {
       };
 
     case UPDATE_GLUCOSE:
+        console.log('State before update:', state); 
+      console.log('Updated data:', action.payload); 
       return {
         ...state,
         glucoseEntries: state.glucoseEntries.map((entry) =>

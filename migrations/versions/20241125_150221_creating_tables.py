@@ -9,6 +9,7 @@ from alembic import op
 import sqlalchemy as sa
 
 
+
 # revision identifiers, used by Alembic.
 revision = 'f91502d7cd49'
 down_revision = 'ffdc0a98111c'
@@ -25,9 +26,7 @@ def upgrade():
     sa.Column('before_lunch', sa.Float(), nullable=True),
     sa.Column('before_dinner', sa.Float(), nullable=True),
     sa.Column('hbA1c', sa.Float(), nullable=True),
-    sa.Column('user_id', sa.Integer(), nullable=False),
-    sa.Column('created_at', sa.DateTime(), nullable=False, ),  # Track creation time
-    sa.Column('updated_at', sa.DateTime(), nullable=False, ),  # Track last update time
+    sa.Column('user_id', sa.Integer(), nullable=False),  
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
