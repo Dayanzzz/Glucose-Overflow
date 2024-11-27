@@ -4,17 +4,17 @@ import './AskQuestion.css';
 import Sidebar from '../SideBar/SideBar'
 
 const CreateQuestion = () => {
-  const [questionText, setQuestionText] = useState(''); // Renamed to reflect question_text
+  const [questionText, setQuestionText] = useState(''); 
   const [error, setError] = useState(null);
 
   const navigate = useNavigate();
 
-  // Handle form submission
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = {
-      question_text: questionText, // Send only question_text
+      question_text: questionText,
     };
 
     try {
@@ -27,7 +27,7 @@ const CreateQuestion = () => {
       });
 
       if (response.ok) {
-        navigate('/questions'); // Redirect to the list of questions after successful submission
+        navigate('/questions'); 
       } else {
         const result = await response.json();
         setError(result.error || 'Something went wrong');
@@ -47,10 +47,10 @@ const CreateQuestion = () => {
         
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="questionText">Your Question:</label> {/* Changed label for clarity */}
+            <label htmlFor="questionText">Your Question:</label> 
             <textarea
               id="questionText"
-              value={questionText} // Updated to questionText state
+              value={questionText} 
               onChange={(e) => setQuestionText(e.target.value)}
               required
             />
@@ -59,7 +59,7 @@ const CreateQuestion = () => {
           <button type="submit">Submit Question</button>
         </form>
 
-        {error && <p className="error">{error}</p>} {/* Display error message if exists */}
+        {error && <p className="error">{error}</p>} 
       </div>
     </div>
   );

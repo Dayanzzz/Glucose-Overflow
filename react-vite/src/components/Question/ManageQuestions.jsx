@@ -8,39 +8,41 @@ import { useNavigate } from 'react-router-dom';
 function QuestionManage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // Accessing the user's questions from Redux
+ 
+
+
   const { myQuestions, loading, error } = useSelector((state) => state.questions);
 
   const [showModal, setShowModal] = useState(false);
   const [questionToDelete, setQuestionToDelete] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");  // State to hold error message
+  const [errorMessage, setErrorMessage] = useState("");  
 
-  // Fetch user's questions on component mount
+ 
   useEffect(() => {
     dispatch(fetchMyQuestions());
   }, [dispatch]);
 
   const handleDelete = (questionId) => {
     console.log("Attempting to delete question with ID:", questionId);
-    setQuestionToDelete(questionId); // Store the ID of the question to be deleted
-    setShowModal(true); // Show the modal
+    setQuestionToDelete(questionId); 
+    setShowModal(true); 
   };
 
   const handleConfirmDelete = async () => {
     if (questionToDelete) {
       try {
-        // Dispatch delete action
+        
         const response = await fetch(`/api/questions/${questionToDelete}`, {
           method: 'DELETE',
         });
 
         if (!response.ok) {
           const errorData = await response.json();
-          setErrorMessage(errorData.error);  // Set error message if any
+          setErrorMessage(errorData.error);  
         } else {
-          dispatch(fetchMyQuestions()); // Re-fetch the questions
-          setShowModal(false); // Close the modal after deleting
-          setErrorMessage(""); // Clear any error message
+          dispatch(fetchMyQuestions()); 
+          setShowModal(false); 
+          setErrorMessage(""); 
         }
       } catch (error) {
         console.error('Error deleting question:', error);
@@ -50,8 +52,8 @@ function QuestionManage() {
   };
 
   const handleCancelDelete = () => {
-    setShowModal(false); // Close the modal without deleting
-    setErrorMessage(""); // Clear any error message when canceling
+    setShowModal(false); 
+    setErrorMessage(""); 
   };
 
   const handleEdit = (questionId) => {
@@ -87,12 +89,12 @@ function QuestionManage() {
         )}
       </div>
 
-      {/* Modal for delete confirmation */}
+      
       <DeleteConfirmationModal 
         show={showModal} 
         onConfirm={handleConfirmDelete} 
         onCancel={handleCancelDelete} 
-        errorMessage={errorMessage}  // Pass the error message to the modal
+        errorMessage={errorMessage}  
       />
     </div>
   );
