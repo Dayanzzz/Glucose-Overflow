@@ -111,7 +111,9 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     comment_text = db.Column(db.String(500), nullable=False)
     date_posted = db.Column(db.DateTime, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')))
     user = db.relationship('User', back_populates='comments')
     
     
