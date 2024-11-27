@@ -41,7 +41,7 @@ function Sidebar(){
             </div>
             
             <div className="sidebar-btn-area">
-            <NavLink to="/favorites" title="See Your Favorites">Favorites</NavLink>
+            <NavLink to="/bookmarks" title="See Your Favorites">Bookmarks</NavLink>
           
             </div>
       </div>

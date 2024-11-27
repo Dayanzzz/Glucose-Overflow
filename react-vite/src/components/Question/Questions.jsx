@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchQuestions } from "../../redux/question"; // Your fetch action
 import Sidebar from "../SideBar/SideBar";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import './Questions.css';
 
 function Questions() {
@@ -34,7 +35,12 @@ function Questions() {
             {questions && questions.map((question) => (
               <li key={question.id} className="question-item">
                 <div className="question-text">
-                  <h3>{question.title}</h3>  {/* Display the title here */}
+                  {/* Wrap title with Link to make it clickable */}
+                  <h3>
+                    <Link to={`/questions/${question.id}`} className="question-title-link">
+                      {question.title}
+                    </Link>
+                  </h3>
                   <p>{question.question_text}</p>
                   <p>Asked on: {new Date(question.date_asked).toLocaleDateString()}</p>
                   <p>Status: {question.answered ? 'Answered' : 'Unanswered'}</p>
