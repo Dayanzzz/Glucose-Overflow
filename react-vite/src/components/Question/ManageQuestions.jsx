@@ -4,6 +4,7 @@ import { fetchMyQuestions, deleteQuestionById } from '../../redux/question';
 import Sidebar from "../SideBar/SideBar";
 import DeleteConfirmationModal from '../GlucoseTracker/DeleteEntry';
 import { useNavigate } from 'react-router-dom';
+import './ManageQuestions.css'
 
 function QuestionManage() {
   const dispatch = useDispatch();

@@ -1,10 +1,131 @@
-.update-page-wrapper{
-    display:flex
-}
-
-.right-page {
-    width:100%;
+/* General layout of the update page */
+.update-page-wrapper {
+    display: flex;
+    width: 100%;
+    padding: 20px;
+  }
+  
+  /* Right content section */
+  .right-page {
+    flex: 1;
     text-align: center;
-    margin-right:100px
-
-}
+    margin-right: 100px;
+  }
+  
+  /* Container for the form */
+  .create-blood-sugar-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Heading for the update page */
+  .create-blood-sugar-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Form styles */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  /* Form group for each input */
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  /* Label for form elements */
+  .form-group label {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 5px;
+  }
+  
+  /* Input fields */
+  .form-group input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+  }
+  
+  .form-group input:focus {
+    border-color: #BAC4A7;
+    outline: none;
+  }
+  
+  /* Submit button styles */
+  button[type="submit"] {
+    padding: 12px 20px;
+    font-size: 1rem;
+    background-color: #BAC4A7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #FFC9C4;
+  }
+  
+  /* Error message styles */
+  .error {
+    color: #FF4D4D;
+    font-size: 1rem;
+    margin-top: 20px;
+  }
+  
+  /* Success message styles */
+  .success {
+    color: #4CAF50;
+    font-size: 1rem;
+    margin-top: 20px;
+  }
+  
+  /* Loading state */
+  .loading-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  /* Modal and form for success/error should be centered and neatly aligned */
+  .modal-content {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .update-page-wrapper {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .right-page {
+      margin-right: 0;
+      width: 100%;
+    }
+  
+    .create-blood-sugar-container {
+      width: 90%;
+    }
+  }
+  

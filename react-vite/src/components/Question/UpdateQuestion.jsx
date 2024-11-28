@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchQuestionById, updateQuestion, fetchQuestions } from '../../redux/question'; 
+import './Update.css'
 
 function UpdateQuestion() {
   const { questionId } = useParams();  

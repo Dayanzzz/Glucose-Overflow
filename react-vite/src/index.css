@@ -120,7 +120,7 @@
     font-weight: 500;
     font-style: normal;
     color: rgb(43, 43, 43);
-    background-color: rgb(160, 141, 119);
+    background-color: #bbc397;
     border-radius: 5px;
     padding: 5px;
     color: rgb(255, 247, 238);
@@ -130,11 +130,11 @@
     font-family: "Ubuntu", sans-serif;
     font-style: normal;
     color: rgb(49, 37, 5);
-    background-color: burlywood;
+    background-color: #BAC4A7;
     font-weight: bold;
     border-radius: 5px;
     border-width: 2px;
-    border-color: blanchedalmond;
+    border-color: #BAC4A7;
     padding: 5px;
   }
 
@@ -142,10 +142,14 @@
     font-family: "Ubuntu", sans-serif;
     font-style: normal;
     color: rgb(49, 37, 5);
-    background-color: rgb(255, 242, 223);
+    background-color: #FFC9C4;
     font-weight: bold;
     border-radius: 5px;
     border-width: 2px;
-    border-color: rgb(235, 207, 164);
+    border-color: #FFC9C4;
     padding: 5px;
+  }
+
+  p, h1, h2, h3, h4, h5, h6, span, a {
+    color: #405418;
   }

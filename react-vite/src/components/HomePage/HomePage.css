@@ -1,26 +1,147 @@
-.page-wrapper{
+/* Overall Page Layout */
+.page-wrapper {
     display: flex;
     flex-direction: row;
-    align-self: center;
+    justify-content: space-between; /* For better alignment */
     margin-left: auto;
     margin-right: auto;
     width: 100%;
- 
     height: 100%;
     min-height: 1200px;
- 
-}
-
-
-
-.content-wrapper{
-    width: 80%;
+    background-color: #f9f9f9; /* Light background for a fresh look */
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .content-wrapper {
+    width: 75%; /* Reduced width for better spacing */
     display: flex;
     flex-direction: column;
-}
-
-.welcome{
-position:absolute;
-right:45%;
-padding-top: 18px
-}
+    padding-left: 20px; /* Adding space from the left side */
+  }
+  
+  /* Welcome Section Styling */
+  .welcome-content {
+    text-align: center; /* Center-align text */
+    padding: 50px 0; /* Added padding for spacing */
+    background-color: #ffffff; /* White background for welcome section */
+    border-radius: 10px; /* Rounded corners for the box */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    color: #405418; 
+  }
+  
+  .welcome-content h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 20px; /* Space below the title */
+  }
+  
+  .intro-message {
+    font-size: 18px;
+    color: #555555;
+    line-height: 1.6;
+    margin-bottom: 30px; /* Added spacing between message and button */
+  }
+  
+  .start-tracking-button,
+  .ask-question-button,
+  .goodrx-button {
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+  }
+  
+  .start-tracking-button {
+    background-color: #BAC4A7; /* Green button */
+    color: white;
+    margin-right: 15px;
+  }
+  
+  .ask-question-button {
+    background-color: #BAC4A7; /* Blue button */
+    color: white;
+  }
+  .ask-question-message{
+    font-size: 18px;
+    color: #555555;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+  .start-tracking-button:hover,
+  .ask-question-button:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+  }
+  
+  /* GoodRx Section */
+  .goodrx-section {
+    margin-top: 40px;
+    padding: 30px;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .goodrx-section h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 20px;
+  }
+  
+  .goodrx-section p {
+    font-size: 18px;
+    color: #666666;
+    margin-bottom: 25px;
+    line-height: 1.6;
+  }
+  
+  .goodrx-button {
+    background-color: #BAC4A7; /* GoodRx branded color */
+    color: white;
+    padding: 14px 30px;
+    border-radius: 8px;
+    font-size: 18px;
+  }
+  
+  .goodrx-button:hover {
+    background-color: #FFC9C4; /* Darker shade on hover */
+  }
+  
+  .goodrx-button:active {
+    background-color: #FFC9C4; /* Even darker shade on click */
+  }
+  
+  .goodrx-logo {
+    width: 150px;
+    margin-bottom: 20px;
+  }
+  
+  /* Media Queries for Responsive Design */
+  @media (max-width: 768px) {
+    .page-wrapper {
+      flex-direction: column;
+      align-items: center;
+      height: auto; /* Adjust for smaller screens */
+      padding: 10px;
+    }
+  
+    .content-wrapper {
+      width: 90%;
+    }
+  
+    .welcome-content {
+      padding: 30px;
+    }
+  
+    .start-tracking-button,
+    .ask-question-button {
+      width: 100%; /* Full-width buttons on smaller screens */
+      margin-bottom: 15px;
+    }
+  }
+  

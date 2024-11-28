@@ -1,10 +1,174 @@
-.error-message {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-    border-radius: 5px;
+/* General page layout */
+.question-page-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+/* Sidebar styles */
+.sidebar {
+  width: 250px; /* Adjust this width as needed */
+  background-color: #F4F4F4;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Container for the questions list */
+.Question-container {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #fafafa;
+}
+
+/* Title of the page */
+.Question-container h1 {
+  font-size: 2.5rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Message when no questions are present */
+.Question-container p {
+  font-size: 1.1rem;
+  color: #777;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Individual question items (cards) */
+.question-item {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.question-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.question-item p {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+/* Question buttons - Edit/Delete */
+.question-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.question-buttons button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.edit-btn {
+  background-color: #BAC4A7; /* Green button */
+  color: white;
+}
+
+.delete-btn {
+  background-color: #FFC9C4; /* Red button */
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #A7C29D;
+}
+
+.delete-btn:hover {
+  background-color: #F79C8D;
+}
+
+/* Modal styles */
+.delete-confirmation-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  padding: 10px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.modal-buttons .confirm-btn {
+  background-color: #FFC9C4;
+  color: white;
+}
+
+.modal-buttons .cancel-btn {
+  background-color: #BAC4A7;
+  color: white;
+}
+
+.modal-buttons .confirm-btn:hover {
+  background-color: #F79C8D;
+}
+
+.modal-buttons .cancel-btn:hover {
+  background-color: #A7C29D;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .question-page-wrapper {
+    flex-direction: column;
+    align-items: center;
   }
-  
+
+  .Question-container {
+    padding: 10px;
+    width: 100%;
+  }
+
+  .question-item {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .question-buttons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .question-buttons button {
+    width: 100%;
+  }
+}
