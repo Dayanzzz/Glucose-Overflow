@@ -13,11 +13,23 @@ function SignupFormPage() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
 
+  // Redirect to home page if user is already logged in
   if (sessionUser) return <Navigate to="/" replace={true} />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Clear previous errors
+    setErrors({});
+
+    // Email validation (basic check for @ symbol)
+    if (!email.includes('@')) {
+      return setErrors({
+        email: "Please enter a valid email address",
+      });
+    }
+
+    // Password match validation
     if (password !== confirmPassword) {
       return setErrors({
         confirmPassword:
@@ -25,6 +37,7 @@ function SignupFormPage() {
       });
     }
 
+    // Dispatch signup action
     const serverResponse = await dispatch(
       thunkSignup({
         email,
@@ -34,9 +47,9 @@ function SignupFormPage() {
     );
 
     if (serverResponse) {
-      setErrors(serverResponse);
+      setErrors(serverResponse); // Display server-side errors if any
     } else {
-      navigate("/");
+      navigate("/"); // Redirect to home page upon successful signup
     }
   };
 
@@ -54,7 +67,7 @@ function SignupFormPage() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <p>{errors.email}</p>} {/* Display email validation error */}
         <label>
           Username
           <input

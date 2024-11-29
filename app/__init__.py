@@ -11,6 +11,8 @@ from .seeds import seed_commands
 from .config import Config
 from .api.glucose_routes import glucose_routes
 from .api.question_routes import question_routes
+from .api.comment_routes import comment_routes
+
 
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
 
@@ -32,6 +34,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(glucose_routes, url_prefix='/api/glucose')
 app.register_blueprint(question_routes, url_prefix='/api/questions')
+app.register_blueprint(comment_routes, url_prefix='/api/questions')
 db.init_app(app)
 Migrate(app, db)
 

@@ -12,13 +12,13 @@ def seed_bookmarks():
     # demo_user = User.query.filter_by(username='Demo').first()
     marnie_user = User.query.filter_by(username='marnie').first()
     question1 = Question.query.filter_by(question_text='What is the best way to manage diabetes?').first()
-    question2 = Question.query.filter_by(question_text='How can I control my blood sugar levels?').first()
+    question3 = Question.query.filter_by(question_text='What are some good glucose control foods?').first()
 
-    bookmark1 = Bookmark(user= marnie_user, question=question2)
-    bookmark2 = Bookmark(user=marnie_user, question=question1)
+    bookmark1 = Bookmark(user= marnie_user, question=question1)
+    bookmark3 = Bookmark(user=marnie_user, question=question3)
 
     db.session.add(bookmark1)
-    db.session.add(bookmark2)
+    db.session.add(bookmark3)
     db.session.commit()
 
 

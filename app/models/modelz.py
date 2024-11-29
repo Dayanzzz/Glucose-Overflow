@@ -119,7 +119,7 @@ class Comment(db.Model):
     user = db.relationship('User', back_populates='comments')
     
     
-    question_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('questions.id')), nullable=True)
+    question_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('questions.id')), nullable=False)
     question = db.relationship('Question', back_populates='comments')
 
     def __repr__(self):
