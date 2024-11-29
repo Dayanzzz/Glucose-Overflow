@@ -30,15 +30,15 @@ def get_questions():
 
 
 @question_routes.route('/<int:question_id>', methods=['GET'])
-@login_required
+# @login_required
 def get_question_by_id(question_id):
     question = Question.query.get(question_id)
     if not question:
          return jsonify({"error": "Resource not found"}), 404
 
     # Ensure the question is created by the current user
-    if question.user_id != current_user.id:
-        return jsonify({"error": "Forbidden"}), 403
+    # if question.user_id != current_user.id:
+    #     return jsonify({"error": "Forbidden"}), 403
 
     return jsonify(question.to_dict())
 
