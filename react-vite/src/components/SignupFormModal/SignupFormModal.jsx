@@ -16,6 +16,17 @@ function SignupFormModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setErrors({});
+
+    // Email validation (basic check for @ symbol)
+    if (!email.includes('@')) {
+      return setErrors({
+        email: "Please enter a valid email address",
+      });
+    }
+
+    
+
     if (password !== confirmPassword) {
       return setErrors({
         confirmPassword:

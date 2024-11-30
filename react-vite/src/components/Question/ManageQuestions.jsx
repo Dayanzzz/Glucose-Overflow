@@ -5,6 +5,7 @@ import Sidebar from "../SideBar/SideBar";
 import DeleteConfirmationModal from '../GlucoseTracker/DeleteEntry';
 import { useNavigate } from 'react-router-dom';
 import './ManageQuestions.css'
+import { Link } from 'react-router-dom';
 
 function QuestionManage() {
   const dispatch = useDispatch();
@@ -70,7 +71,12 @@ function QuestionManage() {
       <div className="Question-container">
         <h1>My Questions</h1>
         {myQuestions.length === 0 ? (
-          <p>You have not asked any questions yet.</p>
+          <p>You have not asked any questions yet.
+             <Link to="/questions/ask">
+            <button className="ask-question-button">Ask a Question</button>
+          </Link>
+          </p>
+          
         ) : (
           myQuestions.map((question) => (
             <div key={question.id} className="question-item">
