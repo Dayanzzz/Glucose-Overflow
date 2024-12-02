@@ -102,12 +102,7 @@ function Navigation() {
         </div>
 
 
-          <div>
-            {/* Regular Login Button */}
-        
-            <button onClick={handleDemoLogin}> Demo User</button>
-            {/* <button navigate='/sign-up'>Sign Up</button> */}
-          </div>
+       
 
           <ProfileButton />
         
