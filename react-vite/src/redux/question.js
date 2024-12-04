@@ -69,40 +69,40 @@ const getQuestions = (questions) => ({
 
 // Action Creators
 
-export const fetchComments = (questionId) => async (dispatch) => {
-    try {
-      const response = await fetch(`/api/questions/${questionId}/comments`);
-      const data = await response.json();
-      if (response.ok) {
-        dispatch(getComments(data));
-      } else {
-        console.error("Error fetching comments:", data);
-      }
-    } catch (error) {
-      console.error("Error fetching comments:", error);
-    }
-  };
+// export const fetchComments = (questionId) => async (dispatch) => {
+//     try {
+//       const response = await fetch(`/api/questions/${questionId}/comments`);
+//       const data = await response.json();
+//       if (response.ok) {
+//         dispatch(getComments(data));
+//       } else {
+//         console.error("Error fetching comments:", data);
+//       }
+//     } catch (error) {
+//       console.error("Error fetching comments:", error);
+//     }
+//   };
   
-  export const createComment = (questionId, commentData) => async (dispatch) => {
-    try {
-      const response = await fetch(`/api/questions/${questionId}/comments`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(commentData),
-      });
+//   export const createComment = (questionId, commentData) => async (dispatch) => {
+//     try {
+//       const response = await fetch(`/api/questions/${questionId}/comments`, {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify(commentData),
+//       });
   
-      const data = await response.json();
-      if (response.ok) {
-        dispatch(postComment(data));  // Dispatch the new comment to Redux
-      } else {
-        console.error("Error posting comment:", data);
-      }
-    } catch (error) {
-      console.error("Error posting comment:", error);
-    }
-  };
+//       const data = await response.json();
+//       if (response.ok) {
+//         dispatch(postComment(data));  // Dispatch the new comment to Redux
+//       } else {
+//         console.error("Error posting comment:", data);
+//       }
+//     } catch (error) {
+//       console.error("Error posting comment:", error);
+//     }
+//   };
 
 export const fetchQuestionById = (questionId) => async (dispatch) => {
     try {

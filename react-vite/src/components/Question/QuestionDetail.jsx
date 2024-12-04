@@ -1,45 +1,78 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchQuestionById } from "../../redux/question"; // Assuming these actions exist
+import { fetchQuestionById } from "../../redux/question"; 
+import { thunkGetComments, thunkAddComment, thunkDeleteComment } from "../../redux/comment";
 import Sidebar from "../SideBar/SideBar";
+import './QuestionDetail.css'
 
 function QuestionDetail() {
-  const { questionId } = useParams();  // Get questionId from the URL
+  const { questionId } = useParams(); // Get questionId from the URL
   const dispatch = useDispatch();
 
-  // Get the question details from Redux state
+  // Get the question details and comments from Redux state
   const question = useSelector((state) => state.questions.currentQuestion);
-  // Comment-related Redux states are commented out as the feature is "coming soon"
-  // const comments = useSelector((state) => state.questions.comments);
-  // const loading = useSelector((state) => state.questions.loading);
-  // const error = useSelector((state) => state.questions.error);
+  const comments = useSelector((state) => state.comments.comments);
+  const loading = useSelector((state) => state.comments.loading);
+  const error = useSelector((state) => state.comments.errors);
 
+  // Get the logged-in user's ID from Redux state
+  const userId = useSelector((state) => state.session?.user?.id); // Access user ID from session
+  console.log("Logged-in userId:", userId);
+  
+
+  const [commentText, setCommentText] = useState("");
   const [errorMessage, setErrorMessage] = useState(""); // Local state for error messages
 
-  // Fetch the question details when the component mounts
+  // Fetch the question details and comments when the component mounts
   useEffect(() => {
     if (questionId) {
-      dispatch(fetchQuestionById(questionId));  // Fetch question details
-      // dispatch(fetchComments(questionId));  // Comment fetching is disabled
+      dispatch(fetchQuestionById(questionId)); // Fetch question details
+      dispatch(thunkGetComments(questionId)); // Fetch comments
     }
   }, [dispatch, questionId]);
 
-  // Since comments are coming soon, we can skip comment submission handling
-  // const handleSubmitComment = async (e) => {
-  //   e.preventDefault();
-  //
-  //   const commentData = {
-  //     comment_text: commentText,
-  //   };
-  //
-  //   try {
-  //     await dispatch(createComment(questionId, commentData)); // This action is now commented out
-  //     setCommentText(""); // Reset after submission
-  //   } catch (err) {
-  //     setErrorMessage("An error occurred while posting your comment.");
-  //   }
-  // };
+  // Handle comment submission
+  const handleSubmitComment = async (e) => {
+    e.preventDefault();
+
+    if (!commentText) {
+      setErrorMessage("Comment cannot be empty");
+      return;
+    }
+
+    if (!userId) {
+      setErrorMessage("You must be logged in to post a comment.");
+      return;
+    }
+
+    const commentData = {
+      text: commentText,
+      user_id: userId, // Use the dynamic user ID
+    };
+
+    try {
+      await dispatch(thunkAddComment(questionId, commentData.text, commentData.user_id)); // Submit comment
+      setCommentText(""); // Reset after submission
+    } catch (err) {
+      setErrorMessage("An error occurred while posting your comment.");
+    }
+  };
+
+  // Handle comment deletion
+  const handleDeleteComment = async (commentId) => {
+    if (!userId) {
+      setErrorMessage("You must be logged in to delete a comment.");
+      return;
+    }
+
+    try {
+      // Call the delete action
+      await dispatch(thunkDeleteComment(commentId));
+    } catch (err) {
+      setErrorMessage("An error occurred while deleting the comment.");
+    }
+  };
 
   return (
     <div className="page-wrapper">
@@ -51,28 +84,49 @@ function QuestionDetail() {
             <h1>{question.title}</h1>
             <p>{question.question_text}</p>
             <p><strong>Asked on:</strong> {new Date(question.date_asked).toLocaleDateString()}</p>
-            <p><strong>Status:</strong> {question.answered ? 'Answered' : 'Unanswered'}</p>
+            {/* <p><strong>Status:</strong> {question.answered ? 'Answered' : 'Unanswered'}</p> */}
           </div>
         )}
 
         {/* Comments Section */}
         <div className="comments-section">
-          <h2>Comments</h2>
-          <p>No comments yet. Be the first to comment!</p>
+          <h2>Responses:</h2>
+          {loading ? (
+            <p>Loading responses...</p>
+          ) : error ? (
+            <p>Error: {error}</p>
+          ) : comments.length === 0 ? (
+            <p>No responses yet. Be the first to respond!</p>
+          ) : (
+            comments.map((comment) => (
+              <div key={comment.id} className="comment">
+                <p>{comment.comment_text}</p>
+                <p><strong>Posted on:</strong> {new Date(comment.date_posted).toLocaleDateString()}</p>
+
+                {/* Only show delete button if the logged-in user owns the comment */}
+                {userId === comment.user_id && (
+                  <button onClick={() => handleDeleteComment(comment.id)} className="delete-button">
+                    Delete
+                  </button>
+                )}
+              </div>
+            ))
+          )}
         </div>
 
-        {/* Comment Form (Coming Soon Message) */}
+        {/* Comment Form */}
         <div className="comment-form">
-          <h2>Post a Comment</h2>
-          <div className="comment-button-container">
-            <button
-              className="comment-button"
-              title="Comments section coming soon"
-            >
-              Post Comment
-            </button>
-            <div className="coming-soon-message">Coming Soon!</div>
-          </div>
+          <h2>Post a Response</h2>
+          <form onSubmit={handleSubmitComment}>
+            <textarea
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+              placeholder="Write your comment here"
+              required
+            />
+            {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>}
+            <button type="submit">Post Response</button>
+          </form>
         </div>
       </div>
     </div>

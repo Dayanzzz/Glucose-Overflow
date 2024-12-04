@@ -11,6 +11,8 @@ import Questions from '../components/Question/Questions';
 import QuestionManage from '../components/Question/ManageQuestions';
 import UpdateQuestion from '../components/Question/UpdateQuestion';
 import QuestionDetail from '../components/Question/QuestionDetail';
+import Bookmarks from '../components/Bookmark/Bookmark';
+
 
 export const router = createBrowserRouter([
   {
@@ -52,10 +54,10 @@ export const router = createBrowserRouter([
         path: "glucose/:entryId",
         element: <UpdateGlucose />,
       },
-      // {
-      //   path: "bookmarks",
-      //   element: <bookmarks />,
-      // },
+      {
+        path: "bookmarks",
+        element: <Bookmarks />,
+      },
       // {
       //   path: "stars",
       //   element: <StarRecipes />,

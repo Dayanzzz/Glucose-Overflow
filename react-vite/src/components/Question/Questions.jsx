@@ -43,7 +43,7 @@ function Questions() {
                   </h3>
                   <p>{question.question_text}</p>
                   <p>Asked on: {new Date(question.date_asked).toLocaleDateString()}</p>
-                  <p>Status: {question.answered ? 'Answered' : 'Unanswered'}</p>
+                  {/* <p>Status: {question.answered ? 'Answered' : 'Unanswered'}</p> */}
                 </div>
               </li>
             ))}

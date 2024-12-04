@@ -38,12 +38,12 @@ function Sidebar(){
             {/* <div className="sidebar-btn-area">
             <NavLink to="/recipes" title="Click here to view Recipes">Recipes</NavLink>
         
-            </div>
+            </div> */}
             
             <div className="sidebar-btn-area">
             <NavLink to="/bookmarks" title="See Your Favorites">Bookmarks</NavLink>
           
-            </div> */}
+            </div>
       </div>
     )
 }

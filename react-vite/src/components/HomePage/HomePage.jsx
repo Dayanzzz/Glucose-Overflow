@@ -61,7 +61,7 @@ function HomePage() {
           <p>
             GoodRx helps you find the best prices for your prescriptions at pharmacies near you. 
             Whether you need insulin, diabetes medication, or other prescriptions, GoodRx makes it easy to compare prices 
-            and save money. Visit the website to see how much you can save today!
+            and save money. Insurance is not required. Visit the website to see how much you can save today!
           </p>
           <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer">
             <button className="goodrx-button">Visit GoodRx</button>

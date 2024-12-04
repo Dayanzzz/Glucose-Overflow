@@ -96,8 +96,11 @@ class Bookmark(db.Model):
     def to_dict(self):
         return {
             'id': self.id,
-            'user_id': self.user_id,
-            'question_id': self.question_id
+        'user_id': self.user_id,
+        'question_id': self.question_id,
+        'question_title': self.question.title,  # Assuming question.title exists
+        'question_text': self.question.question_text
+            
         }
 
 
@@ -130,5 +133,6 @@ class Comment(db.Model):
             'id': self.id,
             'comment_text': self.comment_text,
             'date_posted': self.date_posted,
-            'question_id': self.question_id
+            'question_id': self.question_id,
+            'user_id': self.user_id
         }
