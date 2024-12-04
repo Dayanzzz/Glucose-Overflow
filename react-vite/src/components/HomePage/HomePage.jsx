@@ -63,8 +63,16 @@ function HomePage() {
             Whether you need insulin, diabetes medication, or other prescriptions, GoodRx makes it easy to compare prices 
             and save money. Insurance is not required. Visit the website to see how much you can save today!
           </p>
-          <a href="https://www.goodrx.com" target="_blank" rel="noopener noreferrer">
-            <button className="goodrx-button">Visit GoodRx</button>
+
+          {/* Updated GoodRx button to open link in a new tab */}
+          <a 
+            href="https://www.goodrx.com" 
+            target="_blank" 
+            rel="noopener noreferrer"  // Security best practice for opening links in new tabs
+          >
+            <button className="goodrx-button">
+              Visit GoodRx
+            </button>
           </a>
         </div>
       </div>
@@ -73,4 +81,3 @@ function HomePage() {
 }
 
 export default HomePage;
-

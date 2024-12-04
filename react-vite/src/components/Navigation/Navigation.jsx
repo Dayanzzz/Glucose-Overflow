@@ -62,7 +62,6 @@
 // }
 
 // export default Navigation;
-
 import { useSelector, useDispatch } from "react-redux";
 import { thunkLogin } from "../../redux/session";
 import ProfileButton from "./ProfileButton";
@@ -96,20 +95,22 @@ function Navigation() {
     <div className="wrapper">
       <div className="nav-link-area">
         <div className="headerlink">
-          <a href="https://www.goodrx.com/" title="Click here to access coupons">
+          {/* GoodRx link opening in a new tab */}
+          <a 
+            href="https://www.goodrx.com/" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            title="Click here to access coupons"
+          >
             GoodRx
           </a>
         </div>
 
-
-       
-
-          <ProfileButton />
-        
+        {/* You can keep other links or buttons here */}
+        <ProfileButton />
       </div>
     </div>
   );
 }
 
 export default Navigation;
-
