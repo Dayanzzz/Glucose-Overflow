@@ -115,7 +115,7 @@
   }
   
   .delete-btn:hover {
-    background-color: #FFC9C4;
+    background-color: darkred;
   }
   
   /* Modal styles */
@@ -189,3 +189,10 @@
     }
   }
   
+
+  .glucose-title{
+    display:flex;
+    justify-content: center;
+    font-size: 2.5rem;
+    
+  }

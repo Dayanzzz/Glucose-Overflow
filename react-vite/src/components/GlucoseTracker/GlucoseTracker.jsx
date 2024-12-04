@@ -47,7 +47,7 @@ function GlucoseTracker() {
       <Sidebar />
 
       <div className="right">
-        <div><h1>Blood Sugar Entries</h1></div>
+        <div><h1 className="glucose-title">Blood Sugar Entries</h1></div>
 
         
         <div className="create-entry-btn">

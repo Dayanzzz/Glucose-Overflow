@@ -1,49 +1,130 @@
-/* Styles for the bookmark grid */
-.bookmark-grid {
+/* Overall Page Layout for Bookmarks */
+.bookmarks-page-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background */
+    box-sizing: border-box;
+  }
+  
+  /* Container for the list of bookmarks */
+  .bookmarks-list-container {
+    flex: 1;
+    margin-left: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Title for the Bookmarks Page */
+  .bookmarks-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Grid display for bookmarks */
+  .bookmark-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
-    padding: 20px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
   }
   
-  /* Style for each bookmark tile */
+  /* Individual bookmark item styling */
   .bookmark-tile {
-    background-color: #f9f9f9;
+    background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
   }
   
+  .bookmark-tile:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+  }
+  
+  /* Styling for bookmark text */
   .bookmark-tile h2 {
-    font-size: 1.2rem;
-    margin: 10px 0;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
     color: #333;
   }
   
   .bookmark-tile p {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #555;
-    margin: 10px 0;
+    margin-bottom: 15px;
   }
   
+  /* Link Styling for Bookmark Title */
+  .bookmark-title-link {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #405418;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .bookmark-title-link:hover {
+    color: #FFC9C4;
+    text-decoration: underline;
+  }
+  
+  /* Styling for delete button */
   .delete-bookmark-btn {
-    background-color: red;
+    background-color: #FFC9C4; /* Light red color */
     color: white;
-    border: none;
     padding: 8px 16px;
+    font-size: 0.9rem;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 0.9rem;
-    transition: background-color 0.3s;
+    border: none;
+    transition: background-color 0.3s ease;
   }
   
   .delete-bookmark-btn:hover {
     background-color: darkred;
   }
   
-  .delete-bookmark-btn:focus {
-    outline: none;
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .bookmarks-page-wrapper {
+      flex-direction: column;
+      padding: 10px;
+    }
+  
+    .bookmarks-list-container {
+      width: 100%;
+      margin-left: 0;
+    }
+  
+    .bookmark-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .bookmark-tile {
+      padding: 20px;
+      width: 100%;
+    }
+  
+    .bookmarks-title {
+      font-size: 2rem;
+    }
+  
+    .bookmark-tile h2 {
+      font-size: 1.2rem;
+    }
   }
   
