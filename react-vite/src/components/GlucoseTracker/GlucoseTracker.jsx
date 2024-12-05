@@ -90,7 +90,7 @@ function GlucoseTracker() {
         <div className="chart-container">
           <h2>Glucose Levels Chart</h2>
           <ResponsiveContainer width="100%" height={300}>
-            <ScatterChart>
+            <ScatterChart  margin={{ top: 20, right: 20, bottom: 10, left: 40 }}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis
                 type="number"

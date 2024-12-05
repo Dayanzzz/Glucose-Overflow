@@ -135,7 +135,8 @@
     border-radius: 5px;
     border-width: 2px;
     border-color: #BAC4A7;
-    padding: 5px;
+    padding: 10px;
+    margin-bottom:10px;
   }
 
   button:hover{
