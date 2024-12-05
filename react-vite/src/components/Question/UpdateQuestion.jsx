@@ -9,23 +9,22 @@ function UpdateQuestion() {
   const navigate = useNavigate(); 
   const dispatch = useDispatch();
 
-  // Get the question, loading, and error from the Redux store
   const question = useSelector((state) => state.questions.currentQuestion);
   const loading = useSelector((state) => state.questions.loading);
   const error = useSelector((state) => state.questions.error);
 
-  // Local state for holding form input values
+
   const [questionText, setQuestionText] = useState('');
   const [title, setTitle] = useState('');
 
-  // Fetch the question details when the component mounts
+
   useEffect(() => {
     if (questionId) {
       dispatch(fetchQuestionById(questionId)); 
     }
   }, [questionId, dispatch]);
 
-  // Set initial form values after fetching the question
+
   useEffect(() => {
     if (question) {
       setTitle(question.title); 
@@ -33,26 +32,26 @@ function UpdateQuestion() {
     }
   }, [question]);
 
-  // Handle form submission
+
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // Prepare the updated question data
+   
     const updatedQuestion = {
       title: title,
       question_text: questionText,
     };
 
-    // Dispatch the update action
+   
     dispatch(updateQuestion(questionId, updatedQuestion)).then(() => {
-        dispatch(fetchQuestions());  // Refetch questions after update
+        dispatch(fetchQuestions());  
       });
 
-    // Redirect to the questions page
+
     navigate('/questions');
   };
 
-  // Handle cancel button click
+
   const handleCancel = () => {
     navigate('/questions'); 
   };

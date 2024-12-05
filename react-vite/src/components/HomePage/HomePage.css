@@ -2,31 +2,31 @@
 .page-wrapper {
     display: flex;
     flex-direction: row;
-    justify-content: space-between; /* For better alignment */
+    justify-content: space-between; 
     margin-left: auto;
     margin-right: auto;
     width: 100%;
     height: 100%;
     min-height: 1200px;
-    background-color: #f9f9f9; /* Light background for a fresh look */
+    background-color: #f9f9f9; 
     padding: 20px;
     box-sizing: border-box;
   }
   
   .content-wrapper {
-    width: 75%; /* Reduced width for better spacing */
+    width: 75%; 
     display: flex;
     flex-direction: column;
-    padding-left: 20px; /* Adding space from the left side */
+    padding-left: 20px; 
   }
   
-  /* Welcome Section Styling */
+  
   .welcome-content {
-    text-align: center; /* Center-align text */
-    padding: 50px 0; /* Added padding for spacing */
-    background-color: #ffffff; /* White background for welcome section */
-    border-radius: 10px; /* Rounded corners for the box */
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    text-align: center; 
+    padding: 50px 0; 
+    background-color: #ffffff;
+    border-radius: 10px; 
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); 
     color: #405418; 
   }
   
@@ -34,14 +34,14 @@
     font-size: 36px;
     font-weight: bold;
     color: #333333;
-    margin-bottom: 20px; /* Space below the title */
+    margin-bottom: 20px;
   }
   
   .intro-message {
     font-size: 18px;
     color: #555555;
     line-height: 1.6;
-    margin-bottom: 30px; /* Added spacing between message and button */
+    margin-bottom: 30px; 
   }
   
   .start-tracking-button,
@@ -56,13 +56,13 @@
   }
   
   .start-tracking-button {
-    background-color: #BAC4A7; /* Green button */
+    background-color: #BAC4A7; 
     color: white;
     margin-right: 15px;
   }
   
   .ask-question-button {
-    background-color: #BAC4A7; /* Blue button */
+    background-color: #BAC4A7; 
     color: white;
   }
   .ask-question-message{
@@ -73,10 +73,10 @@
   }
   .start-tracking-button:hover,
   .ask-question-button:hover {
-    transform: scale(1.05); /* Slight zoom effect on hover */
+    transform: scale(1.05); 
   }
   
-  /* GoodRx Section */
+ 
   .goodrx-section {
     margin-top: 40px;
     padding: 30px;
@@ -101,7 +101,7 @@
   }
   
   .goodrx-button {
-    background-color: #BAC4A7; /* GoodRx branded color */
+    background-color: #BAC4A7; 
     color: white;
     padding: 14px 30px;
     border-radius: 8px;
@@ -109,11 +109,11 @@
   }
   
   .goodrx-button:hover {
-    background-color: #FFC9C4; /* Darker shade on hover */
+    background-color: #FFC9C4; 
   }
   
   .goodrx-button:active {
-    background-color: #FFC9C4; /* Even darker shade on click */
+    background-color: #FFC9C4;
   }
   
   .goodrx-logo {
@@ -121,12 +121,11 @@
     margin-bottom: 20px;
   }
   
-  /* Media Queries for Responsive Design */
   @media (max-width: 768px) {
     .page-wrapper {
       flex-direction: column;
       align-items: center;
-      height: auto; /* Adjust for smaller screens */
+      height: auto; 
       padding: 10px;
     }
   
@@ -140,7 +139,7 @@
   
     .start-tracking-button,
     .ask-question-button {
-      width: 100%; /* Full-width buttons on smaller screens */
+      width: 100%; 
       margin-bottom: 15px;
     }
   }

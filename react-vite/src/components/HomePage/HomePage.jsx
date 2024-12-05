@@ -5,13 +5,13 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 function HomePage() {
-  const user = useSelector((store) => store.session.user); // Access user from the redux store
-  const navigate = useNavigate(); // Hook for navigation
+  const user = useSelector((store) => store.session.user); 
+  const navigate = useNavigate(); 
 
-  // Function to handle navigation if the user is not logged in
+  
   const handleRedirect = () => {
     if (!user) {
-      navigate('/login'); // Redirect to login if user is not logged in
+      navigate('/login'); 
     }
   };
 
@@ -25,13 +25,13 @@ function HomePage() {
           Monitor your health over time and make informed decisions to improve your well-being.
         </p>
 
-        {/* Button to start tracking */}
+        
         <button
           className="start-tracking-button"
           onClick={() => {
             handleRedirect();
             if (user) {
-              navigate('/glucose'); // Redirect to glucose page if user is logged in
+              navigate('/glucose'); 
             }
           }}
         >
@@ -42,20 +42,20 @@ function HomePage() {
           Have any questions related to nutrition, diabetes, or health in general? Feel free to ask by clicking the button below!
         </p>
 
-        {/* Button to ask a question */}
+        
         <button
           className="ask-question-button"
           onClick={() => {
             handleRedirect();
             if (user) {
-              navigate('/questions/ask'); // Redirect to ask questions page if user is logged in
+              navigate('/questions/ask'); 
             }
           }}
         >
           Ask a Question
         </button>
 
-        {/* GoodRx Section */}
+       
         <div className="goodrx-section">
           <h2>Save on Prescriptions with GoodRx</h2>
           <p>
@@ -64,11 +64,11 @@ function HomePage() {
             and save money. Insurance is not required. Visit the website to see how much you can save today!
           </p>
 
-          {/* Updated GoodRx button to open link in a new tab */}
+         
           <a 
             href="https://www.goodrx.com" 
             target="_blank" 
-            rel="noopener noreferrer"  // Security best practice for opening links in new tabs
+            rel="noopener noreferrer" 
           >
             <button className="goodrx-button">
               Visit GoodRx

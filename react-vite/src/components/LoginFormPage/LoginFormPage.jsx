@@ -27,22 +27,21 @@ function LoginFormPage() {
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
-      navigate("/"); // Navigate to homepage on successful login
+      navigate("/"); 
     }
   };
 
-  // Handle demo user login
   const handleDemoLogin = async () => {
     const demoUser = {
       email: "demo@aa.io",
-      password: "password", // Example password for demo user
+      password: "password",
     };
     const serverResponse = await dispatch(thunkLogin(demoUser));
 
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
-      navigate("/"); // Navigate to homepage on successful demo login
+      navigate("/"); 
     }
   };
 
@@ -50,11 +49,11 @@ function LoginFormPage() {
     <div className="login-form-container">
       <h1>Log In</h1>
       
-      {/* Display errors if any */}
+   
       {errors.length > 0 &&
         errors.map((message) => <p key={message}>{message}</p>)}
         
-      {/* Login form */}
+   
       <form onSubmit={handleSubmit}>
         <label>
           Email
@@ -81,12 +80,12 @@ function LoginFormPage() {
         <button type="submit">Log In</button>
       </form>
 
-      {/* Sign Up Button */}
+   
       <div className="signup-redirect">
         <p>Don't have an account? <button onClick={() => navigate('/signup')}>Sign Up</button></p>
       </div>
 
-      {/* Demo User Button */}
+    
       <div className="demo-login">
         <button onClick={handleDemoLogin}>Demo User</button>
       </div>

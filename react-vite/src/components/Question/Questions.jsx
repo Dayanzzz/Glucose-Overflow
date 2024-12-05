@@ -1,18 +1,18 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchQuestions } from "../../redux/question"; // Your fetch action
+import { fetchQuestions } from "../../redux/question"; 
 import Sidebar from "../SideBar/SideBar";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link } from "react-router-dom";
 import './Questions.css';
 
 function Questions() {
   const dispatch = useDispatch();
 
-  // Get all questions from Redux state
+
   const { questions, loading, error } = useSelector((state) => state.questions);
 
   useEffect(() => {
-    dispatch(fetchQuestions()); // Fetch all questions when the component mounts
+    dispatch(fetchQuestions()); 
   }, [dispatch]);
 
   if (loading) {

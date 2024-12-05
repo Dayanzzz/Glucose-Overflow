@@ -1,20 +1,20 @@
-/* Reset margin and padding to make sure everything is accounted for */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* General styling for the login page */
+
 .login-page-wrapper {
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center;     /* Center vertically */
-  height: 100vh;           /* Full viewport height */
-  background-color: #f7f7f7; /* Light background color */
+  justify-content: center; 
+  align-items: center;     
+  height: 100vh;           
+  background-color: #f7f7f7; 
 }
 
-/* Centered form container */
+
 .login-form-container {
   background-color: white;
   padding: 30px;
@@ -31,11 +31,11 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* Form styling */
+
 form {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Space between form elements */
+  gap: 15px; 
 }
 
 label {
@@ -56,14 +56,14 @@ input[type="password"] {
 
 input[type="text"]:focus,
 input[type="password"]:focus {
-  border-color: #4CAF50; /* Green border when focused */
+  border-color: #4CAF50;
 }
 
 button[type="submit"] {
   padding: 12px;
   font-size: 16px;
   color: white;
-  background-color: #4CAF50; /* Green button */
+  background-color: #4CAF50; 
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -71,14 +71,14 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: #45a049; /* Darker green on hover */
+  background-color: #45a049; 
 }
 
 button[type="submit"]:active {
-  background-color: #388e3c; /* Even darker on click */
+  background-color: #388e3c; 
 }
 
-/* Error messages styling */
+
 .error-message {
   color: red;
   font-size: 14px;
@@ -89,24 +89,23 @@ button[type="submit"]:active {
   margin: 5px 0;
 }
 
-/* Responsive design for smaller screens */
 @media (max-width: 768px) {
   .login-form-container {
-    width: 90%; /* Full width on mobile */
+    width: 90%; 
     padding: 20px;
   }
 
   h1 {
-    font-size: 24px; /* Slightly smaller title on mobile */
+    font-size: 24px; 
   }
 
   label {
-    font-size: 14px; /* Smaller label text */
+    font-size: 14px; 
   }
 
   input[type="text"],
   input[type="password"] {
-    font-size: 14px; /* Smaller input text */
+    font-size: 14px; 
   }
 
   button[type="submit"] {

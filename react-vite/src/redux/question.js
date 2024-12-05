@@ -110,7 +110,7 @@ export const fetchQuestionById = (questionId) => async (dispatch) => {
       const data = await response.json();
   
       if (response.ok) {
-        dispatch(getQuestionById(data)); // Dispatch to store the question in Redux state
+        dispatch(getQuestionById(data)); 
       } else {
         console.error("Error fetching question by ID:", data);
       }
@@ -135,7 +135,7 @@ export const fetchQuestions = () => async (dispatch) => {
     }
   };
   
-  // Thunk Action: Fetch the questions created by the current user (my questions)
+
   export const fetchMyQuestions = () => async (dispatch) => {
     try {
       const response = await fetch('/api/questions/manage');
@@ -151,7 +151,7 @@ export const fetchQuestions = () => async (dispatch) => {
     }
   };
   
-  // Thunk Action: Create a new question
+  
   export const createQuestion = (newQuestionData) => async (dispatch) => {
     try {
       const response = await fetch('/api/questions', {
@@ -165,7 +165,7 @@ export const fetchQuestions = () => async (dispatch) => {
       const data = await response.json();
   
       if (response.ok) {
-        dispatch(createQuestionAction(data)); // Dispatch to add the new question to Redux store
+        dispatch(createQuestionAction(data)); 
       } else {
         console.error("Error creating question:", data);
       }
@@ -174,7 +174,7 @@ export const fetchQuestions = () => async (dispatch) => {
     }
   };
   
-  // Thunk Action: Update an existing question
+  
   export const updateQuestion = (questionId, updatedData) => async (dispatch) => {
     try {
       const response = await fetch(`/api/questions/manage/${questionId}`, {
@@ -188,7 +188,7 @@ export const fetchQuestions = () => async (dispatch) => {
       const data = await response.json();
   
       if (response.ok) {
-        dispatch(updateQuestionAction(data)); // Dispatch to update question in Redux store
+        dispatch(updateQuestionAction(data)); 
       } else {
         console.error("Error updating question:", data);
       }
@@ -197,7 +197,7 @@ export const fetchQuestions = () => async (dispatch) => {
     }
   };
   
-  // Thunk Action: Delete a question
+  
   export const deleteQuestionById = (questionId) => async (dispatch) => {
     try {
       const response = await fetch(`/api/questions/manage/${questionId}`, {
@@ -205,7 +205,7 @@ export const fetchQuestions = () => async (dispatch) => {
       });
   
       if (response.ok) {
-        dispatch(deleteQuestion(questionId)); // Dispatch to delete the question from Redux store
+        dispatch(deleteQuestion(questionId)); 
       } else {
         console.error("Error deleting question:", response);
       }
@@ -231,7 +231,7 @@ export const fetchQuestions = () => async (dispatch) => {
       case CREATE_QUESTION:
         return {
           ...state,
-          questions: [action.payload, ...state.questions], // Adds new question at the beginning
+          questions: [action.payload, ...state.questions], 
         };
       case UPDATE_QUESTION:
         return {
@@ -248,7 +248,7 @@ export const fetchQuestions = () => async (dispatch) => {
         case GET_QUESTION_BY_ID:
             return {
               ...state,
-              currentQuestion: action.payload, // Store the fetched question in currentQuestion
+              currentQuestion: action.payload, 
             };
       default:
         return state;

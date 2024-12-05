@@ -73,7 +73,7 @@ function Navigation() {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.session.user);
 
-  // Demo user login credentials
+
   const demoUser = {
     email: "demo@aa.io",
     password: "password"
@@ -82,10 +82,10 @@ function Navigation() {
   const handleDemoLogin = async (e) => {
     e.preventDefault();
     
-    // Dispatching the demo login action
+
     const serverResponse = await dispatch(thunkLogin(demoUser));
 
-    // If there are any errors during login, you can handle them here
+ 
     if (serverResponse) {
       console.error("Error logging in as demo user:", serverResponse);
     }
@@ -95,7 +95,7 @@ function Navigation() {
     <div className="wrapper">
       <div className="nav-link-area">
         <div className="headerlink">
-          {/* GoodRx link opening in a new tab */}
+         
           <a 
             href="https://www.goodrx.com/" 
             target="_blank" 
@@ -106,7 +106,7 @@ function Navigation() {
           </a>
         </div>
 
-        {/* You can keep other links or buttons here */}
+      
         <ProfileButton />
       </div>
     </div>

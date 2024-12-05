@@ -1,19 +1,19 @@
-/* General page layout */
+
 .question-page-wrapper {
   display: flex;
   width: 100%;
   height: 100vh;
 }
 
-/* Sidebar styles */
+
 .sidebar {
-  width: 250px; /* Adjust this width as needed */
+  width: 250px; 
   background-color: #F4F4F4;
   padding: 20px;
   overflow-y: auto;
 }
 
-/* Container for the questions list */
+
 .Question-container {
   flex: 1;
   padding: 20px;
@@ -21,7 +21,7 @@
   background-color: #fafafa;
 }
 
-/* Title of the page */
+
 .Question-container h1 {
   font-size: 2.5rem;
   color: #333;
@@ -29,7 +29,7 @@
   margin-bottom: 30px;
 }
 
-/* Message when no questions are present */
+
 .Question-container p {
   font-size: 1.1rem;
   color: #777;
@@ -37,7 +37,7 @@
   margin-top: 20px;
 }
 
-/* Individual question items (cards) */
+
 .question-item {
   background-color: #fff;
   padding: 20px;
@@ -58,7 +58,7 @@
   margin-bottom: 10px;
 }
 
-/* Question buttons - Edit/Delete */
+
 .question-buttons {
   display: flex;
   justify-content: space-between;
@@ -75,12 +75,12 @@
 }
 
 .edit-btn {
-  background-color: #BAC4A7; /* Green button */
+  background-color: #BAC4A7; 
   color: white;
 }
 
 .delete-btn {
-  background-color: #FFC9C4; /* Red button */
+  background-color: #FFC9C4; 
   color: white;
 }
 
@@ -92,7 +92,6 @@
   background-color: #F79C8D;
 }
 
-/* Modal styles */
 .delete-confirmation-modal {
   position: fixed;
   top: 0;
@@ -146,7 +145,7 @@
   background-color: #A7C29D;
 }
 
-/* Responsive Design */
+
 @media (max-width: 768px) {
   .question-page-wrapper {
     flex-direction: column;

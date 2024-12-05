@@ -49,12 +49,12 @@ const CreateQuestion = () => {
         
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="title">Title:</label>  {/* Title label */}
+            <label htmlFor="title">Title:</label>  
             <input
               type="text"
               id="title"
-              value={title}  // Bind title to the input
-              onChange={(e) => setTitle(e.target.value)}  // Update title state
+              value={title} 
+              onChange={(e) => setTitle(e.target.value)} 
               required
             />
           </div>

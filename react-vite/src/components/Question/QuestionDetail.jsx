@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { fetchQuestionById } from "../../redux/question"; 
+import { fetchQuestionById } from "../../redux/question";
 import { thunkGetComments, thunkAddComment, thunkDeleteComment } from "../../redux/comment";
+import { createBookmark } from "../../redux/bookmark"; // Import the createBookmark action
 import Sidebar from "../SideBar/SideBar";
-import './QuestionDetail.css'
+import './QuestionDetail.css';
 
 function QuestionDetail() {
   const { questionId } = useParams(); // Get questionId from the URL
@@ -13,16 +14,18 @@ function QuestionDetail() {
   // Get the question details and comments from Redux state
   const question = useSelector((state) => state.questions.currentQuestion);
   const comments = useSelector((state) => state.comments.comments);
+  const bookmarks = useSelector((state) => state.bookmarks.bookmarks); // Get bookmarks from Redux state
   const loading = useSelector((state) => state.comments.loading);
   const error = useSelector((state) => state.comments.errors);
 
   // Get the logged-in user's ID from Redux state
   const userId = useSelector((state) => state.session?.user?.id); // Access user ID from session
-  console.log("Logged-in userId:", userId);
-  
 
   const [commentText, setCommentText] = useState("");
   const [errorMessage, setErrorMessage] = useState(""); // Local state for error messages
+
+  // Check if the question is already bookmarked by the current user
+  const isBookmarked = bookmarks.some((bookmark) => bookmark.question_id === questionId);
 
   // Fetch the question details and comments when the component mounts
   useEffect(() => {
@@ -74,6 +77,16 @@ function QuestionDetail() {
     }
   };
 
+  // Handle adding/removing bookmark
+  const handleBookmark = () => {
+    if (isBookmarked) {
+      // If the question is already bookmarked, do nothing (or add functionality to remove bookmark)
+      console.log('Already bookmarked');
+    } else {
+      dispatch(createBookmark(questionId, userId)); // Dispatch the action to add bookmark
+    }
+  };
+
   return (
     <div className="page-wrapper">
       <Sidebar />
@@ -84,7 +97,10 @@ function QuestionDetail() {
             <h1>{question.title}</h1>
             <p>{question.question_text}</p>
             <p><strong>Asked on:</strong> {new Date(question.date_asked).toLocaleDateString()}</p>
-            {/* <p><strong>Status:</strong> {question.answered ? 'Answered' : 'Unanswered'}</p> */}
+            {/* Add Bookmark Button */}
+            <button onClick={handleBookmark} className="bookmark-button">
+              {isBookmarked ? 'Bookmarked' : 'Bookmark'}
+            </button>
           </div>
         )}
 
