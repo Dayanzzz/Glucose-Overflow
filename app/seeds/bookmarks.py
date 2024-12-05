@@ -11,14 +11,29 @@ from sqlalchemy.sql import text
 def seed_bookmarks():
     demo_user = User.query.filter_by(username='Demo').first()
     marnie_user = User.query.filter_by(username='marnie').first()
-    question1 = Question.query.filter_by(question_text='What is the best way to manage diabetes?').first()
-    question3 = Question.query.filter_by(question_text='What are some good glucose control foods?').first()
+    question1 = Question.query.filter_by(question_text='What is the best way to manage diabetes? I have been having difficulty with understanding when to take my medication and the type of diet I should be on to decrease my daily blood sugar. I do not like needles and I hate having to use insulin everyday. Any suggestions?').first()
+    question3 = Question.query.filter_by(question_text='What are some good glucose control foods? I am hispanic and I eat tortillas and rice with almost everything. How can I switch that with something healthy?').first()
+    question5 = Question.query.filter_by(question_text='What are some diabetes-friendly meals that you have found to be both tasty and easy to prepare? Are there specific ingredients or food groups you focus on to help manage your blood sugar levels?').first()
+    question9 = Question.query.filter_by(question_text='What are some effective strategies or tips for meal planning as a diabetic? How do you balance meals with your blood sugar levels in mind, and do you use any tools or apps to help with this?').first()
+    question10 = Question.query.filter_by(question_text='Grocery shopping for a diabetes-friendly diet can be expensive. Can anyone share their tips for navigating grocery stores on a budget, especially in the Oakland/Berkeley area? How do you prioritize healthy food options without breaking the bank?').first()
+    question18 = Question.query.filter_by(question_text='Living with diabetes can be mentally taxing. How do you manage stress or anxiety related to your condition? Are there any specific practices or support systems you use to maintain mental well-being while managing diabetes?').first()
+    question17 = Question.query.filter_by(question_text='Has anyone found any supplements, vitamins, or natural remedies that help with managing diabetes or improving blood sugar control? Are there any that you would recommend to others who are managing the condition?').first()
 
     bookmark1 = Bookmark(user= demo_user, question=question1)
     bookmark3 = Bookmark(user=marnie_user, question=question3)
+    bookmark5 = Bookmark(user= demo_user, question=question10)
+    bookmark2 = Bookmark(user=marnie_user, question=question5)
+    bookmark4 = Bookmark(user=marnie_user, question=question9)
+    bookmark6 = Bookmark(user= demo_user, question=question18)
+    bookmark7 = Bookmark(user=marnie_user, question=question17)
 
     db.session.add(bookmark1)
     db.session.add(bookmark3)
+    db.session.add(bookmark2)
+    db.session.add(bookmark4)
+    db.session.add(bookmark5)
+    db.session.add(bookmark6)
+    db.session.add(bookmark7)
     db.session.commit()
 
 

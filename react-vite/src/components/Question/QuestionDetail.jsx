@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { fetchQuestionById } from "../../redux/question";
 import { thunkGetComments, thunkAddComment, thunkDeleteComment } from "../../redux/comment";
 import { createBookmark } from "../../redux/bookmark"; // Import the createBookmark action
@@ -10,6 +10,7 @@ import './QuestionDetail.css';
 function QuestionDetail() {
   const { questionId } = useParams(); // Get questionId from the URL
   const dispatch = useDispatch();
+  const navigate = useNavigate(); // Hook for navigation
 
   // Get the question details and comments from Redux state
   const question = useSelector((state) => state.questions.currentQuestion);
@@ -23,6 +24,7 @@ function QuestionDetail() {
 
   const [commentText, setCommentText] = useState("");
   const [errorMessage, setErrorMessage] = useState(""); // Local state for error messages
+  const [showPopup, setShowPopup] = useState(false); // State for showing the success popup message
 
   // Check if the question is already bookmarked by the current user
   const isBookmarked = bookmarks.some((bookmark) => bookmark.question_id === questionId);
@@ -77,34 +79,57 @@ function QuestionDetail() {
     }
   };
 
-  // Handle adding/removing bookmark
-  const handleBookmark = () => {
-    if (isBookmarked) {
-      // If the question is already bookmarked, do nothing (or add functionality to remove bookmark)
-      console.log('Already bookmarked');
-    } else {
-      dispatch(createBookmark(questionId, userId)); // Dispatch the action to add bookmark
+ 
+  const handleBookmark = async () => {
+    if (!userId) {
+      setErrorMessage("You must be logged in to bookmark a question.");
+      return;
     }
+  
+    // Check if the question is already bookmarked by the user
+    if (isBookmarked) {
+      setErrorMessage("You have already bookmarked this question.");
+      return;
+    }
+  
+    // Check if the user is trying to bookmark their own question
+    if (question.user_id === userId) {
+      setErrorMessage("You cannot bookmark your own question.");
+      return;
+    }
+      try {
+        await dispatch(createBookmark(questionId, userId)); 
+       
+        setShowPopup(true); 
+        setTimeout(() => {
+          setShowPopup(false); 
+          navigate('/bookmarks'); 
+          dispatch(fetchBookmarks());
+        }, 2000);
+      } catch (err) {
+        setErrorMessage("An error occurred while bookmarking the question.");
+      }
+    
   };
 
   return (
     <div className="page-wrapper">
       <Sidebar />
       <div className="right-page">
-        {/* Question Details */}
+      
         {question && (
           <div className="question-detail">
             <h1>{question.title}</h1>
             <p>{question.question_text}</p>
             <p><strong>Asked on:</strong> {new Date(question.date_asked).toLocaleDateString()}</p>
-            {/* Add Bookmark Button */}
+            
             <button onClick={handleBookmark} className="bookmark-button">
               {isBookmarked ? 'Bookmarked' : 'Bookmark'}
             </button>
           </div>
         )}
 
-        {/* Comments Section */}
+       
         <div className="comments-section">
           <h2>Responses:</h2>
           {loading ? (
@@ -119,7 +144,7 @@ function QuestionDetail() {
                 <p>{comment.comment_text}</p>
                 <p><strong>Posted on:</strong> {new Date(comment.date_posted).toLocaleDateString()}</p>
 
-                {/* Only show delete button if the logged-in user owns the comment */}
+              
                 {userId === comment.user_id && (
                   <button onClick={() => handleDeleteComment(comment.id)} className="delete-button">
                     Delete
@@ -130,7 +155,7 @@ function QuestionDetail() {
           )}
         </div>
 
-        {/* Comment Form */}
+     
         <div className="comment-form">
           <h2>Post a Response</h2>
           <form onSubmit={handleSubmitComment}>
@@ -144,6 +169,13 @@ function QuestionDetail() {
             <button type="submit">Post Response</button>
           </form>
         </div>
+
+       
+        {showPopup && (
+          <div className="popup-message">
+            <p>Question has been successfully bookmarked!</p>
+          </div>
+        )}
       </div>
     </div>
   );

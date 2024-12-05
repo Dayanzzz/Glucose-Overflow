@@ -52,6 +52,7 @@ class Question(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     user = db.relationship('User', back_populates='questions')
+  
 
    
 
@@ -73,7 +74,8 @@ class Question(db.Model):
             'answered': self.answered,
             'date_asked': self.date_asked,
             
-            'user_id': self.user_id
+            'user_id': self.user_id,
+            'has_responses': len(self.comments) > 0 
         }
 
 class Bookmark(db.Model):
@@ -98,7 +100,7 @@ class Bookmark(db.Model):
             'id': self.id,
         'user_id': self.user_id,
         'question_id': self.question_id,
-        'question_title': self.question.title,  # Assuming question.title exists
+        'question_title': self.question.title, 
         'question_text': self.question.question_text
             
         }

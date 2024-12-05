@@ -88,42 +88,36 @@ export const fetchBookmarks = () => async (dispatch, getState) => {
 
 // Create bookmark thunk (no more setError, just logging)
 export const createBookmark = (questionId, userId) => async (dispatch) => {
-  try {
-    const numericQuestionId = parseInt(questionId, 10);
+   try {
+    // Convert questionId from string to number
+    const numericQuestionId = parseInt(questionId, 10);  // or use `+questionId`
 
-    console.log('Creating bookmark with:', { numericQuestionId, userId });
+    console.log("Sending data to POST request:", { user_id: userId, question_id: numericQuestionId });
 
-    // Client-side validation for userId and questionId
-    if (!userId || !Number.isInteger(userId)) {
-      console.error('Invalid user ID');
-      return;
-    }
-
-    if (!numericQuestionId || !Number.isInteger(numericQuestionId)) {
-      console.error('Invalid question ID');
-      return;
-    }
-
-    // Send the request with credentials (cookies) for session-based authentication
-    const response = await fetch('/api/bookmarks', {
+    // Make the POST request to create the bookmark
+    const response = await fetch(`/api/bookmarks/${numericQuestionId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      credentials: 'same-origin', // This ensures cookies are sent with the request
-      body: JSON.stringify({ user_id: userId, question_id: numericQuestionId }), // Send the question_id in the request body
+      credentials: 'include', // Ensure cookies are sent with the request (if applicable)
+      body: JSON.stringify({ user_id: userId, question_id: numericQuestionId }), // Send the bookmark data in the request body
     });
 
-    if (response.ok) {
-      const data = await response.json();
-      console.log('Bookmark successfully created:', data); // Log the success response
-      dispatch(addBookmark(data)); // Dispatch the newly created bookmark to the Redux store
-    } else {
-      const data = await response.json();
-      console.error('Error creating bookmark:', data.errors || 'Unknown error'); // Log the error for debugging
-    }
+    // Check if the response is successful
+    if (!response.ok) throw new Error('Failed to create bookmark');
+    
+    // Parse the response as JSON (the newly created bookmark)
+    const newBookmark = await response.json();
+    
+    // Dispatch the new bookmark data using the addBookmark action creator
+    dispatch(addBookmark(newBookmark));
+
+    console.log('Bookmark successfully created:', newBookmark); // Log the created bookmark data
+
   } catch (error) {
-    console.error('Error in creating bookmark:', error); // Log any unexpected errors
+    // Log any errors that occurred during the process
+    console.error('Error adding bookmark:', error.message); // Log the error message without modifying state
   }
 };
 

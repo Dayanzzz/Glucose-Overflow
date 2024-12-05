@@ -38,37 +38,28 @@ def delete_bookmark(bookmark_id):
 
 
 
-@bookmark_routes.route('/', methods=['POST'])
+
+
+@bookmark_routes.route('/<int:question_id>', methods=['POST'])
 @login_required
-def add_bookmark():
-    # Get the JSON data from the request
-    data = request.get_json()
+def create_bookmark(question_id):
+    user_id = request.json.get('user_id')
+    
+   
+    if not user_id:
+        return jsonify({'error': 'Missing user_id'}), 400
 
-    # Validate that 'question_id' is provided in the request
-    if not data or 'question_id' not in data:
-        return jsonify({'error': 'Question ID is required'}), 400
+ 
+    existing_bookmark = Bookmark.query.filter_by(user_id=user_id, question_id=question_id).first()
+    if existing_bookmark:
+        return jsonify({'error': 'Bookmark already exists'}), 400
 
-    # Check if the question exists (optional but useful)
-    question = Question.query.get(data['question_id'])
-    if not question:
-        return jsonify({'error': 'Question not found'}), 404
-
-    # Create a new Bookmark instance
-    new_bookmark = Bookmark(
-        user_id=current_user.id,
-        question_id=data['question_id']
-    )
-
-    # Add the bookmark to the database and commit
+   
+    new_bookmark = Bookmark(user_id=user_id, question_id=question_id)
     db.session.add(new_bookmark)
     db.session.commit()
 
-    # Return a success response with the new bookmark
-    return jsonify({
-        'id': new_bookmark.id,
-        'user_id': new_bookmark.user_id,
-        'question_id': new_bookmark.question_id,
-    }), 201
+    return jsonify(new_bookmark.to_dict()), 201  
 
 # try:
 #         # Get the user ID and question ID from the request JSON body

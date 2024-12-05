@@ -1,16 +1,15 @@
-/* Overall Page Layout for Bookmarks */
+
 .bookmarks-page-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    background-color: #f9f9f9; /* Light background */
-    box-sizing: border-box;
-  }
-  
-  /* Container for the list of bookmarks */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 100vh; 
+  padding: 20px;
+  background-color: #f9f9f9; 
+  box-sizing: border-box;
+}
+
   .bookmarks-list-container {
     flex: 1;
     margin-left: 20px;
@@ -20,7 +19,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
   
-  /* Title for the Bookmarks Page */
+
   .bookmarks-title {
     font-size: 2.5rem;
     font-weight: bold;
@@ -29,7 +28,7 @@
     text-align: center;
   }
   
-  /* Grid display for bookmarks */
+ 
   .bookmark-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -39,7 +38,7 @@
     margin: 0;
   }
   
-  /* Individual bookmark item styling */
+
   .bookmark-tile {
     background-color: #fff;
     border: 1px solid #ddd;
@@ -54,7 +53,7 @@
     transform: translateY(-5px);
   }
   
-  /* Styling for bookmark text */
+
   .bookmark-tile h2 {
     font-size: 1.5rem;
     margin-bottom: 10px;
@@ -67,7 +66,7 @@
     margin-bottom: 15px;
   }
   
-  /* Link Styling for Bookmark Title */
+
   .bookmark-title-link {
     font-size: 1.5rem;
     font-weight: bold;
@@ -82,9 +81,9 @@
     text-decoration: underline;
   }
   
-  /* Styling for delete button */
+
   .delete-bookmark-btn {
-    background-color: #FFC9C4; /* Light red color */
+    background-color: #FFC9C4; 
     color: white;
     padding: 8px 16px;
     font-size: 0.9rem;
@@ -97,8 +96,7 @@
   .delete-bookmark-btn:hover {
     background-color: darkred;
   }
-  
-  /* Responsive Design */
+ 
   @media (max-width: 768px) {
     .bookmarks-page-wrapper {
       flex-direction: column;

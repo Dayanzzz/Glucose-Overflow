@@ -13,9 +13,27 @@ def seed_glucose_trackers():
         date=date(2024, 11, 1), before_breakfast=120, before_lunch=130, before_dinner=110, hbA1c=6.5, user=demo_user)
     glucose2 = GlucoseTracker(
         date=date(2024, 11, 2), before_breakfast=140, before_lunch=145, before_dinner=120, hbA1c=6.8, user=marnie_user)
+    glucose3 = GlucoseTracker(
+        date=date(2024, 11, 3), before_breakfast=125, before_lunch=135, before_dinner=115, hbA1c=6.6, user=demo_user)
+    glucose4 = GlucoseTracker(
+        date=date(2024, 11, 4), before_breakfast=130, before_lunch=140, before_dinner=118, hbA1c=6.7, user=demo_user)
+    glucose5 = GlucoseTracker(
+        date=date(2024, 11, 5), before_breakfast=132, before_lunch=142, before_dinner=122, hbA1c=6.7, user=demo_user)
+    glucose6 = GlucoseTracker(
+        date=date(2024, 11, 6), before_breakfast=128, before_lunch=137, before_dinner=119, hbA1c=6.6, user=demo_user)
+    glucose7 = GlucoseTracker(
+        date=date(2024, 11, 7), before_breakfast=140, before_lunch=148, before_dinner=124, hbA1c=6.8, user=demo_user)
+    glucose8 = GlucoseTracker(
+        date=date(2024, 11, 8), before_breakfast=135, before_lunch=145, before_dinner=120, hbA1c=6.7, user=demo_user)
 
     db.session.add(glucose1)
     db.session.add(glucose2)
+    db.session.add(glucose3)
+    db.session.add(glucose4)
+    db.session.add(glucose5)
+    db.session.add(glucose6)
+    db.session.add(glucose7)
+    db.session.add(glucose8)
     db.session.commit()
 
 

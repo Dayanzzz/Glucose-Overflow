@@ -49,14 +49,14 @@ def get_question_by_id(question_id):
 def create_question():
     data = request.get_json()
 
-    # Ensure that all required fields are present
+ 
     if 'question_text' not in data:
         return jsonify({'error': 'Question text is required'}), 400
 
     question_text = data['question_text']
     title = data['title']
     
-    # Create a new Question instance
+  
     new_question = Question(
         title=title,
         question_text=question_text,
@@ -70,7 +70,7 @@ def create_question():
     return jsonify(new_question.to_dict()), 201
 
 
-# PUT: Update an existing question by ID
+
 @question_routes.route('/manage/<int:question_id>', methods=['PUT'])
 @login_required
 def update_question(question_id):
@@ -79,13 +79,13 @@ def update_question(question_id):
         return jsonify({"error": "Resource not found"}), 404
 
 
-    # Ensure the question is created by the current user
+   
     if question.user_id != current_user.id:
         return jsonify({"error": "Forbidden"}), 403
 
     data = request.get_json()
 
-    # Update the fields as needed
+  
     if 'question_text' in data:
         question.question_text = data['question_text']
 
@@ -99,8 +99,6 @@ def update_question(question_id):
 
     return jsonify(question.to_dict())
 
-
-# DELETE: Delete a question by ID
 @question_routes.route('/manage/<int:question_id>', methods=['DELETE'])
 @login_required
 def delete_question(question_id):
@@ -109,7 +107,7 @@ def delete_question(question_id):
         return jsonify({"error": "Resource not found"}), 404
 
 
-    # Ensure the question is created by the current user
+
     if question.user_id != current_user.id:
          return jsonify({"error": "Forbidden"}), 403
     

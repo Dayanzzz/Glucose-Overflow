@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBookmarks, deleteBookmark } from '../../redux/bookmark'; // Assuming deleteBookmark is a Redux action
+import { fetchBookmarks, deleteBookmark } from '../../redux/bookmark'; 
 import { Link } from 'react-router-dom';
 import './Bookmark.css';
 import Sidebar from '../SideBar/SideBar';
@@ -14,7 +14,7 @@ const Bookmarks = () => {
     dispatch(fetchBookmarks());
   }, [dispatch]);
 
-  // Log errors to the console (if any) but don't show them on the page
+
   useEffect(() => {
     if (error) {
       console.error('Error fetching bookmarks:', error.message || error);
@@ -22,7 +22,7 @@ const Bookmarks = () => {
   }, [error]);
 
   const handleDeleteBookmark = (bookmarkId) => {
-    // Dispatch deleteBookmark action to remove the bookmark
+   
     dispatch(deleteBookmark(bookmarkId));
   };
 
@@ -32,7 +32,7 @@ const Bookmarks = () => {
       <div className="bookmarks-list-container">
         <h1 className="bookmarks-title">Your Bookmarks</h1>
 
-        {/* Display bookmarks if available */}
+ 
         {bookmarks.length > 0 ? (
           <div className="bookmark-grid">
             {bookmarks.map((bookmark) => (
@@ -42,7 +42,7 @@ const Bookmarks = () => {
                 </Link>
                 <p>{bookmark.question_text}</p>
 
-                {/* Delete button */}
+            
                 <button
                   onClick={() => handleDeleteBookmark(bookmark.id)}
                   className="delete-bookmark-btn"
