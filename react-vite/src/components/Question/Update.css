@@ -110,7 +110,7 @@
     margin-top: 20px;
   }
   
-
+  /* Responsive Design */
   @media (max-width: 768px) {
     .update-question-page-wrapper {
       flex-direction: column;
@@ -126,5 +126,10 @@
     button[type="submit"], button[type="button"] {
       width: 100%;
     }
+  }
+
+  .edit-q-wrap{
+    width:80%;
+    margin-left:100px;
   }
   

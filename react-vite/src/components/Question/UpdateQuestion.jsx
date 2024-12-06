@@ -60,7 +60,7 @@ function UpdateQuestion() {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div>
+    <div className="edit-q-wrap">
       <h1>Edit Question</h1>
 
       <form onSubmit={handleSubmit}>
