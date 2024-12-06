@@ -47,7 +47,6 @@ function GlucoseTracker() {
     navigate('/glucose/new');
   };
 
- 
   const handleExportCSV = () => {
     const dataToExport = glucoseEntries.map((entry) => ({
       Date: new Date(entry.date).toLocaleDateString('en-US', { timeZone: 'UTC' }),
@@ -66,7 +65,6 @@ function GlucoseTracker() {
     link.click();
   };
 
- 
   const handleExportPDF = () => {
     const doc = new jsPDF();
 
@@ -82,13 +80,11 @@ function GlucoseTracker() {
 
     let yPosition = 40;
     glucoseEntries.forEach(entry => {
-        // Safely handle each value, default to 'N/A' if null or undefined
         const beforeBreakfast = entry.before_breakfast != null ? entry.before_breakfast.toString() : 'N/A';
         const beforeLunch = entry.before_lunch != null ? entry.before_lunch.toString() : 'N/A';
         const beforeDinner = entry.before_dinner != null ? entry.before_dinner.toString() : 'N/A';
         const hbA1c = entry.hbA1c != null ? entry.hbA1c.toString() : 'N/A';
 
-      
         const formattedDate = format(new Date(entry.date), 'MM/dd/yyyy'); 
 
         doc.text(formattedDate, 20, yPosition);
@@ -102,8 +98,8 @@ function GlucoseTracker() {
     doc.save('glucose_data_report.pdf');
 };
 
+  const sortedEntries = glucoseEntries.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-  
   const chartData = glucoseEntries.flatMap((entry) => [
     { date: new Date(entry.date).getTime(), glucoseLevel: entry.before_breakfast, type: 'Before Breakfast' },
     { date: new Date(entry.date).getTime(), glucoseLevel: entry.before_lunch, type: 'Before Lunch' },
@@ -111,7 +107,6 @@ function GlucoseTracker() {
     { date: new Date(entry.date).getTime(), glucoseLevel: entry.hbA1c, type: 'HbA1c' } 
   ]);
 
-  
   const CustomTooltip = ({ payload, label }) => {
     if (payload && payload.length) {
       const entry = payload[0].payload;  
@@ -127,9 +122,7 @@ function GlucoseTracker() {
     return null;
   };
 
- 
   const formatXAxis = (tickItem) => {
-    
     const date = new Date(tickItem);
     return date.toLocaleDateString('en-US', { timeZone: 'UTC' }); 
   };
@@ -147,13 +140,11 @@ function GlucoseTracker() {
           </button>
         </div>
 
-       
         <div className="export-buttons">
           <button onClick={handleExportCSV} className="export-csv-btn">Export to CSV</button>
           <button onClick={handleExportPDF} className="export-pdf-btn">Export to PDF</button>
         </div>
 
-        
         <div className="chart-container">
           <h2>Glucose Levels Chart</h2>
           <ResponsiveContainer width="100%" height={300}>
@@ -177,13 +168,11 @@ function GlucoseTracker() {
           </ResponsiveContainer>
         </div>
 
-       
         <div className="entries-grid">
-          {glucoseEntries.map((entry, index) => (
+          {sortedEntries.map((entry, index) => (
             <div className="entry-card" key={index}>
               <div className="data">
                 <h2>HbA1c: {entry.hbA1c}</h2>
-              
                 <p>Date: {new Date(entry.date).toLocaleDateString('en-US', { timeZone: 'UTC' })}</p>
                 <div className="glucose-levels">
                   <p>Before Breakfast: {entry.before_breakfast} mg/dL</p>
@@ -200,7 +189,6 @@ function GlucoseTracker() {
         </div>
       </div>
 
-  
       <DeleteConfirmationModal 
         show={showModal} 
         onConfirm={handleConfirmDelete} 
