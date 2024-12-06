@@ -3,41 +3,44 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { fetchQuestionById } from "../../redux/question";
 import { thunkGetComments, thunkAddComment, thunkDeleteComment } from "../../redux/comment";
-import { createBookmark } from "../../redux/bookmark"; // Import the createBookmark action
+import { createBookmark } from "../../redux/bookmark"; 
 import Sidebar from "../SideBar/SideBar";
 import './QuestionDetail.css';
+import Modal from './Modal';
 
 function QuestionDetail() {
-  const { questionId } = useParams(); // Get questionId from the URL
+  const { questionId } = useParams();
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Hook for navigation
+  const navigate = useNavigate(); 
 
-  // Get the question details and comments from Redux state
+ 
   const question = useSelector((state) => state.questions.currentQuestion);
   const comments = useSelector((state) => state.comments.comments);
-  const bookmarks = useSelector((state) => state.bookmarks.bookmarks); // Get bookmarks from Redux state
+  const bookmarks = useSelector((state) => state.bookmarks.bookmarks); 
   const loading = useSelector((state) => state.comments.loading);
   const error = useSelector((state) => state.comments.errors);
 
-  // Get the logged-in user's ID from Redux state
-  const userId = useSelector((state) => state.session?.user?.id); // Access user ID from session
+
+  const userId = useSelector((state) => state.session?.user?.id); 
 
   const [commentText, setCommentText] = useState("");
-  const [errorMessage, setErrorMessage] = useState(""); // Local state for error messages
-  const [showPopup, setShowPopup] = useState(false); // State for showing the success popup message
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showPopup, setShowPopup] = useState(false); 
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [commentToDelete, setCommentToDelete] = useState(null); 
 
-  // Check if the question is already bookmarked by the current user
+  
   const isBookmarked = bookmarks.some((bookmark) => bookmark.question_id === questionId);
 
-  // Fetch the question details and comments when the component mounts
+  
   useEffect(() => {
     if (questionId) {
-      dispatch(fetchQuestionById(questionId)); // Fetch question details
-      dispatch(thunkGetComments(questionId)); // Fetch comments
+      dispatch(fetchQuestionById(questionId)); 
+      dispatch(thunkGetComments(questionId)); 
     }
   }, [dispatch, questionId]);
 
-  // Handle comment submission
+  
   const handleSubmitComment = async (e) => {
     e.preventDefault();
 
@@ -53,70 +56,77 @@ function QuestionDetail() {
 
     const commentData = {
       text: commentText,
-      user_id: userId, // Use the dynamic user ID
+      user_id: userId, 
     };
 
     try {
-      await dispatch(thunkAddComment(questionId, commentData.text, commentData.user_id)); // Submit comment
-      setCommentText(""); // Reset after submission
+      await dispatch(thunkAddComment(questionId, commentData.text, commentData.user_id)); 
+      setCommentText(""); 
     } catch (err) {
       setErrorMessage("An error occurred while posting your comment.");
     }
   };
 
-  // Handle comment deletion
-  const handleDeleteComment = async (commentId) => {
-    if (!userId) {
-      setErrorMessage("You must be logged in to delete a comment.");
-      return;
-    }
+  
+  const handleDeleteClick = (commentId) => {
+    setCommentToDelete(commentId); 
+    setShowDeleteModal(true); 
+  };
 
-    try {
-      // Call the delete action
-      await dispatch(thunkDeleteComment(commentId));
-    } catch (err) {
-      setErrorMessage("An error occurred while deleting the comment.");
+  
+  const handleConfirmDelete = async () => {
+    if (commentToDelete) {
+      try {
+        await dispatch(thunkDeleteComment(commentToDelete)); 
+        setShowDeleteModal(false);
+        setCommentToDelete(null); 
+      } catch (err) {
+        setErrorMessage("An error occurred while deleting the comment.");
+      }
     }
   };
 
- 
+
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
+    setCommentToDelete(null);
+  };
+
   const handleBookmark = async () => {
     if (!userId) {
       setErrorMessage("You must be logged in to bookmark a question.");
       return;
     }
   
-    // Check if the question is already bookmarked by the user
+  
     if (isBookmarked) {
       setErrorMessage("You have already bookmarked this question.");
       return;
     }
   
-    // Check if the user is trying to bookmark their own question
+ 
     if (question.user_id === userId) {
       setErrorMessage("You cannot bookmark your own question.");
       return;
     }
-      try {
-        await dispatch(createBookmark(questionId, userId)); 
-       
-        setShowPopup(true); 
-        setTimeout(() => {
-          setShowPopup(false); 
-          navigate('/bookmarks'); 
-          dispatch(fetchBookmarks());
-        }, 2000);
-      } catch (err) {
-        setErrorMessage("An error occurred while bookmarking the question.");
-      }
-    
+    try {
+      await dispatch(createBookmark(questionId, userId)); 
+     
+      setShowPopup(true); 
+      setTimeout(() => {
+        setShowPopup(false); 
+        navigate('/bookmarks'); 
+        dispatch(fetchBookmarks());
+      }, 2000);
+    } catch (err) {
+      setErrorMessage("An error occurred while bookmarking the question.");
+    }
   };
 
   return (
     <div className="page-wrapper">
       <Sidebar />
       <div className="right-page">
-      
         {question && (
           <div className="question-detail">
             <h1>{question.title}</h1>
@@ -129,7 +139,6 @@ function QuestionDetail() {
           </div>
         )}
 
-       
         <div className="comments-section">
           <h2>Responses:</h2>
           {loading ? (
@@ -144,9 +153,8 @@ function QuestionDetail() {
                 <p>{comment.comment_text}</p>
                 <p><strong>Posted on:</strong> {new Date(comment.date_posted).toLocaleDateString()}</p>
 
-              
                 {userId === comment.user_id && (
-                  <button onClick={() => handleDeleteComment(comment.id)} className="delete-button">
+                  <button onClick={() => handleDeleteClick(comment.id)} className="delete-button">
                     Delete
                   </button>
                 )}
@@ -155,7 +163,6 @@ function QuestionDetail() {
           )}
         </div>
 
-     
         <div className="comment-form">
           <h2>Post a Response</h2>
           <form onSubmit={handleSubmitComment}>
@@ -170,12 +177,18 @@ function QuestionDetail() {
           </form>
         </div>
 
-       
         {showPopup && (
           <div className="popup-message">
             <p>Question has been successfully bookmarked!</p>
           </div>
         )}
+
+        <Modal
+          show={showDeleteModal}
+          onClose={handleCloseDeleteModal}
+          onConfirm={handleConfirmDelete}
+          message="Are you sure you want to delete this response?"
+        />
       </div>
     </div>
   );
