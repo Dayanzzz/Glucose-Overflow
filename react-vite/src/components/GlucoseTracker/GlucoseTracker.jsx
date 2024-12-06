@@ -179,7 +179,7 @@ function GlucoseTracker() {
 
        
         <div className="entries-grid">
-          {glucoseEntries.slice(0, 6).map((entry, index) => (
+          {glucoseEntries.map((entry, index) => (
             <div className="entry-card" key={index}>
               <div className="data">
                 <h2>HbA1c: {entry.hbA1c}</h2>
