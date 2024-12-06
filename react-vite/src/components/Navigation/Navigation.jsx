@@ -105,10 +105,18 @@ function Navigation() {
             GoodRx
           </a>
           <a 
+            href="https://www.alamedacountysocialservices.org/our-services/Health-and-Food/CalFresh/index" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            title="Click here to apply for food assistance in Alameda County"
+          >
+             CalFresh
+          </a>
+          <a 
             href="https://diabetes.org//" 
             target="_blank" 
             rel="noopener noreferrer" 
-            title="Click here to access coupons"
+            title="Click here to get updated infromation on diabetes"
           >
              Diabetes Association
           </a>

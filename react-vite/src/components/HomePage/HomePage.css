@@ -1,146 +1,187 @@
 /* Overall Page Layout */
 .page-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between; 
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    height: 100%;
-    min-height: 1200px;
-    background-color: #f9f9f9; 
-    padding: 20px;
-    box-sizing: border-box;
-  }
-  
-  .content-wrapper {
-    width: 75%; 
-    display: flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; 
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 100%;
+  min-height: 1200px;
+  background-color: #f9f9f9; 
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.content-wrapper {
+  width: 75%; 
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px; 
+}
+
+.welcome-content {
+  text-align: center; 
+  padding: 50px 0; 
+  background-color: #ffffff;
+  border-radius: 10px; 
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); 
+  color: #405418; 
+}
+
+.welcome-content h1 {
+  font-size: 36px;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+.intro-message {
+  font-size: 18px;
+  color: #555555;
+  line-height: 1.6;
+  margin-bottom: 30px; 
+}
+
+.start-tracking-button,
+.ask-question-button,
+.goodrx-button,
+.calfresh-button {
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.start-tracking-button {
+  background-color: #BAC4A7; 
+  color: white;
+  margin-right: 15px;
+}
+
+.ask-question-button {
+  background-color: #BAC4A7; 
+  color: white;
+}
+
+.ask-question-message {
+  font-size: 18px;
+  color: #555555;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.start-tracking-button:hover,
+.ask-question-button:hover {
+  transform: scale(1.05); 
+}
+
+/* GoodRx Section */
+.goodrx-section {
+  margin-top: 40px;
+  padding: 30px;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.goodrx-section h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+.goodrx-section p {
+  font-size: 18px;
+  color: #666666;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.goodrx-button {
+  background-color: #BAC4A7; 
+  color: white;
+  padding: 14px 30px;
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+.goodrx-button:hover {
+  background-color: #FFC9C4; 
+}
+
+.goodrx-button:active {
+  background-color: #FFC9C4;
+}
+
+.goodrx-logo {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+/* CalFresh Section */
+.calfresh-section {
+  margin-top: 40px;
+  padding: 30px;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.calfresh-section h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+.calfresh-section p {
+  font-size: 18px;
+  color: #666666;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.calfresh-button {
+  background-color: #BAC4A7; 
+  color: white;
+  padding: 14px 30px;
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+.calfresh-button:hover {
+  background-color: #FFC9C4; 
+}
+
+.calfresh-button:active {
+  background-color: #FFC9C4;
+}
+
+@media (max-width: 768px) {
+  .page-wrapper {
     flex-direction: column;
-    padding-left: 20px; 
+    align-items: center;
+    height: auto; 
+    padding: 10px;
   }
-  
-  
+
+  .content-wrapper {
+    width: 90%;
+  }
+
   .welcome-content {
-    text-align: center; 
-    padding: 50px 0; 
-    background-color: #ffffff;
-    border-radius: 10px; 
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); 
-    color: #405418; 
-  }
-  
-  .welcome-content h1 {
-    font-size: 36px;
-    font-weight: bold;
-    color: #333333;
-    margin-bottom: 20px;
-  }
-  
-  .intro-message {
-    font-size: 18px;
-    color: #555555;
-    line-height: 1.6;
-    margin-bottom: 30px; 
-  }
-  
-  .start-tracking-button,
-  .ask-question-button,
-  .goodrx-button {
-    padding: 12px 25px;
-    font-size: 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: none;
-  }
-  
-  .start-tracking-button {
-    background-color: #BAC4A7; 
-    color: white;
-    margin-right: 15px;
-  }
-  
-  .ask-question-button {
-    background-color: #BAC4A7; 
-    color: white;
-  }
-  .ask-question-message{
-    font-size: 18px;
-    color: #555555;
-    line-height: 1.6;
-    margin-bottom: 30px;
-  }
-  .start-tracking-button:hover,
-  .ask-question-button:hover {
-    transform: scale(1.05); 
-  }
-  
- 
-  .goodrx-section {
-    margin-top: 40px;
     padding: 30px;
-    background-color: #f1f1f1;
-    border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
   }
-  
-  .goodrx-section h2 {
-    font-size: 28px;
-    font-weight: bold;
-    color: #333333;
-    margin-bottom: 20px;
+
+  .start-tracking-button,
+  .ask-question-button {
+    width: 100%; 
+    margin-bottom: 15px;
   }
-  
-  .goodrx-section p {
-    font-size: 18px;
-    color: #666666;
-    margin-bottom: 25px;
-    line-height: 1.6;
-  }
-  
-  .goodrx-button {
-    background-color: #BAC4A7; 
-    color: white;
-    padding: 14px 30px;
-    border-radius: 8px;
-    font-size: 18px;
-  }
-  
-  .goodrx-button:hover {
-    background-color: #FFC9C4; 
-  }
-  
-  .goodrx-button:active {
-    background-color: #FFC9C4;
-  }
-  
-  .goodrx-logo {
-    width: 150px;
-    margin-bottom: 20px;
-  }
-  
-  @media (max-width: 768px) {
-    .page-wrapper {
-      flex-direction: column;
-      align-items: center;
-      height: auto; 
-      padding: 10px;
-    }
-  
-    .content-wrapper {
-      width: 90%;
-    }
-  
-    .welcome-content {
-      padding: 30px;
-    }
-  
-    .start-tracking-button,
-    .ask-question-button {
-      width: 100%; 
-      margin-bottom: 15px;
-    }
-  }
-  
+}

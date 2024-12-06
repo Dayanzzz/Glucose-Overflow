@@ -8,7 +8,6 @@ function HomePage() {
   const user = useSelector((store) => store.session.user); 
   const navigate = useNavigate(); 
 
-  
   const handleRedirect = () => {
     if (!user) {
       navigate('/login'); 
@@ -72,6 +71,25 @@ function HomePage() {
           >
             <button className="goodrx-button">
               Visit GoodRx
+            </button>
+          </a>
+        </div>
+
+        {/* CalFresh Section */}
+        <div className="calfresh-section">
+          <h2>CalFresh: Nutritional Assistance for Low-Income Families</h2>
+          <p>
+            CalFresh, known federally as the Supplemental Nutrition Assistance Program (SNAP), provides monthly assistance for low or no income individuals and families to purchase nutritious food. 
+            The CalFresh program issues monthly benefits on an Electronic Benefit Transfer (EBT) card, similar to an ATM card, to purchase food at retail stores and farmers markets that accept EBT cards.
+          </p>
+
+          <a 
+            href="https://www.alamedacountysocialservices.org/our-services/Health-and-Food/CalFresh/index" 
+            target="_blank" 
+            rel="noopener noreferrer"
+          >
+            <button className="calfresh-button">
+              Learn More About CalFresh
             </button>
           </a>
         </div>
