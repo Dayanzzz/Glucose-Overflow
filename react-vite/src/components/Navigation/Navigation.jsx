@@ -104,6 +104,16 @@ function Navigation() {
           >
             GoodRx
           </a>
+          <a 
+            href="https://diabetes.org//" 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            title="Click here to access coupons"
+          >
+             Diabetes Association
+          </a>
+
+          
         </div>
 
       
