@@ -1,4 +1,3 @@
-/* Overall Page Layout */
 .page-wrapper {
   display: flex;
   flex-direction: row;
@@ -78,10 +77,90 @@
   transform: scale(1.05); 
 }
 
-/* GoodRx Section */
+
+.ask-question-section {
+  margin-top: 40px;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.ask-question-section h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+.ask-question-section p {
+  font-size: 18px;
+  color: #666666;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.ask-question-section .ask-question-button {
+  background-color: #BAC4A7;
+  color: white;
+  padding: 14px 30px;
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+.ask-question-section .ask-question-button:hover {
+  background-color: #FFC9C4;
+}
+
+.ask-question-section .ask-question-button:active {
+  background-color: #FFC9C4;
+}
+
+
+.glucose-tracker-section {
+  margin-top: 40px;
+  padding: 10px;
+  background-color: #f1f1f1;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.glucose-tracker-section h2 {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+.glucose-tracker-section p {
+  font-size: 18px;
+  color: #666666;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.glucose-tracker-section .start-tracking-button {
+  background-color: #BAC4A7;
+  color: white;
+  padding: 14px 30px;
+  border-radius: 8px;
+  font-size: 18px;
+}
+
+.glucose-tracker-section .start-tracking-button:hover {
+  background-color: #FFC9C4;
+}
+
+.glucose-tracker-section .start-tracking-button:active {
+  background-color: #FFC9C4;
+}
+
+
 .goodrx-section {
   margin-top: 40px;
-  padding: 30px;
+  padding: 10px;
   background-color: #f1f1f1;
   border-radius: 10px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
@@ -123,10 +202,10 @@
   margin-bottom: 20px;
 }
 
-/* CalFresh Section */
+
 .calfresh-section {
   margin-top: 40px;
-  padding: 30px;
+  padding: 10px;
   background-color: #f1f1f1;
   border-radius: 10px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
