@@ -10,28 +10,31 @@ function NewGlucose() {
   const [dinner, setDinner] = useState('');
   const [hbA1c, setHbA1c] = useState('');
   const [error, setError] = useState(null);
-  
+
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-
+  
     if (!breakfast && !lunch && !dinner) {
       setError('Please fill in at least one meal value (Breakfast, Lunch, or Dinner).');
       return;
     }
-
+  
     
+    const selectedDate = new Date(date + "T00:00:00Z"); 
+    const formattedDate = selectedDate.toISOString().split('T')[0]; 
+  
     const data = {
-        date: date,  
-        before_breakfast: breakfast ? parseFloat(breakfast) : null,
-        before_lunch: lunch ? parseFloat(lunch) : null,
-        before_dinner: dinner ? parseFloat(dinner) : null,
-        hbA1c: hbA1c ? parseFloat(hbA1c) : null, 
+      date: formattedDate, 
+      before_breakfast: breakfast ? parseFloat(breakfast) : null,
+      before_lunch: lunch ? parseFloat(lunch) : null,
+      before_dinner: dinner ? parseFloat(dinner) : null,
+      hbA1c: hbA1c ? parseFloat(hbA1c) : null,
     };
+  
     console.log('Data being sent to API:', data);
-
+  
     try {
       const response = await fetch('/api/glucose', {
         method: 'POST',
@@ -40,9 +43,8 @@ function NewGlucose() {
         },
         body: JSON.stringify(data),
       });
-
+  
       if (response.ok) {
-        
         navigate('/glucose');
       } else {
         const result = await response.json();
@@ -53,6 +55,8 @@ function NewGlucose() {
       console.error(err);
     }
   };
+  
+  
 
   return (
     <div className="Create-wrapper">
@@ -68,6 +72,7 @@ function NewGlucose() {
               value={date}
               onChange={(e) => setDate(e.target.value)}
               required
+              max={new Date().toISOString().split('T')[0]} 
             />
           </div>
           <div className="form-group">
@@ -75,7 +80,7 @@ function NewGlucose() {
             <input
               type="number"
               id="breakfast"
-              value={breakfast || ''}  
+              value={breakfast || ''}
               onChange={(e) => setBreakfast(e.target.value)}
             />
           </div>
@@ -84,7 +89,7 @@ function NewGlucose() {
             <input
               type="number"
               id="lunch"
-              value={lunch || ''}  
+              value={lunch || ''}
               onChange={(e) => setLunch(e.target.value)}
             />
           </div>
@@ -93,7 +98,7 @@ function NewGlucose() {
             <input
               type="number"
               id="dinner"
-              value={dinner || ''}  
+              value={dinner || ''}
               onChange={(e) => setDinner(e.target.value)}
             />
           </div>
@@ -102,14 +107,13 @@ function NewGlucose() {
             <input
               type="number"
               id="hbA1c"
-              value={hbA1c || ''} 
+              value={hbA1c || ''}
               onChange={(e) => setHbA1c(e.target.value)}
             />
           </div>
           <button type="submit">Create Blood Sugar Entry</button>
         </form>
 
-        
         {error && <p className="error">{error}</p>}
       </div>
     </div>
