@@ -98,7 +98,9 @@ function GlucoseTracker() {
     doc.save('glucose_data_report.pdf');
 };
 
-  const sortedEntries = glucoseEntries.sort((a, b) => new Date(a.date) - new Date(b.date));
+// Sorting glucose entries by date in descending order (most recent first)
+const sortedEntries = glucoseEntries.sort((a, b) => new Date(b.date) - new Date(a.date));
+
 
   const chartData = glucoseEntries.flatMap((entry) => [
     { date: new Date(entry.date).getTime(), glucoseLevel: entry.before_breakfast, type: 'Before Breakfast' },
