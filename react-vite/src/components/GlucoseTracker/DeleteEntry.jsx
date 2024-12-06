@@ -7,7 +7,7 @@ const DeleteConfirmationModal = ({ show, onConfirm, onCancel, errorMessage }) =>
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        <h2>Are you sure you want to delete this note?</h2>
+        <h2>Are you sure you want to delete this entry?</h2>
         {errorMessage && (
           <div className="error-message">
             {errorMessage}
