@@ -152,3 +152,16 @@
     }
   }
   
+  .popup-message {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #BBC397;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    z-index: 1000;
+    text-align: center;
+  }
+  
