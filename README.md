@@ -1,4 +1,4 @@
-# Glucose Overflow - Flask React Project
+# Glucose Overflow
 
 Glucose Overflow is a web application built with Flask for the backend and React for the frontend, designed to manage and analyze glucose data. This project allows users to track glucose levels and offers insights into health trends based on user data.
 
