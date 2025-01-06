@@ -14,7 +14,7 @@ Before getting started, ensure you have the following installed:
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/glucose-overflow.git
+    git clone https://github.com/Dayanzzz/Glucose-Overflow.git
     ```
 
 2. Install backend dependencies:
